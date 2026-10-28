@@ -1,0 +1,15 @@
+# Source files: LF in the repository on every platform.
+* text=auto eol=lf
+
+# Never touch the bytes of binary assets.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.gif binary
+*.mp4 binary
+*.woff binary
+*.woff2 binary

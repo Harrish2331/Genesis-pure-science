@@ -1,0 +1,1197 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   GENESIS PURE LIFESCIENCES — DESIGN SYSTEM
+
+   Every colour below comes from the brand guidelines (section 03, sampled
+   from the approved logo artwork):
+     Deep Blue  #087ECD   Sky Blue  #20A7DB   Leaf Green  #41B183
+     Fresh Lime #9BD96B   Slate     #50606E   Charcoal    #202020
+   Supporting tints are mixed from those. Two accessible "ink" variants exist
+   because the raw brand blue (4.3:1) and green (2.7:1) are below WCAG AA for
+   small text on white: --color-action and --color-leaf-ink are the same hues,
+   deepened until they pass. The raw colours are used for graphics, gradients
+   and large display elements.
+   ========================================================================== */
+
+@theme {
+  --color-deep: #087ecd;
+  --color-sky: #20a7db;
+  --color-leaf: #41b183;
+  --color-lime: #9bd96b;
+  --color-slate: #50606e;
+  --color-charcoal: #202020;
+
+  --color-ink: #14212b;
+  --color-body: #3b4955;
+  --color-muted: #5c6b78;
+  --color-action: #0a6cb0;
+  --color-action-strong: #08578f;
+  --color-leaf-ink: #1f7a53;
+
+  --color-mist: #f2f8fc;
+  --color-mint: #f1f9f4;
+  --color-cloud: #f7f9fb;
+  --color-line: #e1e9ef;
+  --color-line-strong: #c9d7e1;
+
+  /* Extended background palette — section washes only, never text. */
+  --color-lavender: #f5f2ff;
+  --color-lavender-deep: #ebe5fd;
+  --color-peach: #fff4ec;
+  --color-warm: #fbf8f3;
+  --color-skywash: #eef6fe;
+  --color-mintwash: #eef8f2;
+
+  --color-danger: #b42318;
+  --color-danger-bg: #fef3f2;
+  --color-warn: #8a5300;
+  --color-warn-bg: #fff7e8;
+  --color-ok: #1f7a53;
+  --color-ok-bg: #ecf8f1;
+
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+  --radius-panel: 1.75rem;
+
+  --shadow-soft: 0 1px 2px rgb(16 42 67 / 0.04), 0 10px 30px -14px rgb(16 42 67 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(16 42 67 / 0.05), 0 22px 48px -20px rgb(8 87 143 / 0.28);
+  --shadow-ring: 0 0 0 1px rgb(201 215 225 / 0.7);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --breakpoint-xs: 26rem;
+}
+
+:root {
+  --grad-brand: linear-gradient(115deg, #087ecd 0%, #20a7db 34%, #41b183 70%, #9bd96b 100%);
+  --grad-brand-soft: linear-gradient(115deg, rgb(8 126 205 / 0.12), rgb(32 167 219 / 0.1) 35%, rgb(65 177 131 / 0.1) 70%, rgb(155 217 107 / 0.14));
+  --grad-line: linear-gradient(90deg, #087ecd, #20a7db 40%, #41b183 72%, #9bd96b);
+  --nav-h: 5.25rem;
+  color-scheme: light;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--nav-h) + 1rem);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    background: #ffffff;
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: rgb(32 167 219 / 0.22);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 3px solid rgb(10 108 176 / 0.55);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  a {
+    text-underline-offset: 0.2em;
+  }
+  img,
+  svg,
+  video {
+    max-width: 100%;
+  }
+}
+
+/* ── Layout & typography components ─────────────────────────────────── */
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 40rem) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+  .section-y {
+    padding-block: clamp(4rem, 2.6rem + 5.5vw, 7.5rem);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-action);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--grad-line);
+  }
+
+  .t-display {
+    font-size: clamp(2.2rem, 1.35rem + 2.5vw, 3.7rem);
+    line-height: 1.07;
+    letter-spacing: -0.032em;
+  }
+  .t-page {
+    font-size: clamp(2.1rem, 1.5rem + 2.4vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+  .t-section {
+    font-size: clamp(1.75rem, 1.3rem + 1.7vw, 2.7rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
+  .t-card {
+    font-size: 1.2rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+  .lead {
+    font-size: clamp(1.08rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.65;
+    color: var(--color-body);
+  }
+  .meta {
+    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+    color: var(--color-muted);
+  }
+
+  .grad-text {
+    background: linear-gradient(105deg, #087ecd 0%, #1497cf 38%, #2fa57c 75%, #59b54e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .grad-rule {
+    height: 2px;
+    border: 0;
+    border-radius: 2px;
+    background: var(--grad-line);
+  }
+
+  /* ── Buttons ──────────────────────────────────────────────────────── */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color 220ms var(--ease-out-soft),
+      color 220ms var(--ease-out-soft),
+      box-shadow 260ms var(--ease-out-soft),
+      transform 220ms var(--ease-out-soft),
+      border-color 220ms var(--ease-out-soft);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.99);
+  }
+  .btn[disabled],
+  .btn[aria-disabled="true"] {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .btn-primary {
+    background: var(--color-action);
+    color: #fff;
+    box-shadow: 0 10px 24px -12px rgb(8 87 143 / 0.65);
+  }
+  .btn-primary:hover {
+    background: var(--color-action-strong);
+    box-shadow: 0 16px 30px -14px rgb(8 87 143 / 0.7);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    background: #fff;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1.5px var(--color-line-strong);
+  }
+  .btn-secondary:hover {
+    box-shadow: inset 0 0 0 1.5px var(--color-action);
+    color: var(--color-action);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    min-height: 2.5rem;
+    padding: 0.5rem 0.25rem;
+    color: var(--color-action);
+    border-radius: 6px;
+  }
+  .btn-ghost:hover {
+    color: var(--color-action-strong);
+  }
+  .btn-ghost .btn-arrow {
+    transition: transform 240ms var(--ease-out-soft);
+  }
+  .btn-ghost:hover .btn-arrow,
+  .btn:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+  .btn-whatsapp {
+    background: #fff;
+    color: #12704a;
+    box-shadow: inset 0 0 0 1.5px rgb(37 211 102 / 0.55);
+  }
+  .btn-whatsapp:hover {
+    background: #effbf3;
+    transform: translateY(-1px);
+  }
+  .btn-sm {
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  /* ── Surfaces ─────────────────────────────────────────────────────── */
+  .card {
+    position: relative;
+    background: #fff;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-ring), var(--shadow-soft);
+  }
+  .card-hover {
+    transition:
+      box-shadow 320ms var(--ease-out-soft),
+      transform 320ms var(--ease-out-soft);
+  }
+  .card-hover:hover {
+    box-shadow: 0 0 0 1px rgb(32 167 219 / 0.35), var(--shadow-lift);
+    transform: translateY(-3px);
+  }
+  /* A card whose top edge carries the brand gradient on hover. */
+  .card-accent::before {
+    content: "";
+    position: absolute;
+    inset: 0 1.25rem auto;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--grad-line);
+    opacity: 0;
+    transform: scaleX(0.4);
+    transition:
+      opacity 320ms var(--ease-out-soft),
+      transform 420ms var(--ease-out-soft);
+  }
+  .card-accent:hover::before,
+  .card-accent:focus-within::before {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    background: var(--color-mist);
+    color: var(--color-action-strong);
+    box-shadow: inset 0 0 0 1px rgb(10 108 176 / 0.12);
+  }
+  .chip-green {
+    background: var(--color-mint);
+    color: var(--color-leaf-ink);
+    box-shadow: inset 0 0 0 1px rgb(31 122 83 / 0.14);
+  }
+  .chip-neutral {
+    background: var(--color-cloud);
+    color: var(--color-body);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+  .chip-warn {
+    background: var(--color-warn-bg);
+    color: var(--color-warn);
+    box-shadow: inset 0 0 0 1px rgb(138 83 0 / 0.18);
+  }
+
+  /* Dashboard status markers (admin only — never used on the public site). */
+  .review-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    border: 1px dashed #c27a00;
+    background: #fff8eb;
+    color: #7a4a00;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    vertical-align: middle;
+    /* One line where it fits; wraps rather than pushing a narrow layout sideways. */
+    max-width: 100%;
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  /* ── Forms ────────────────────────────────────────────────────────── */
+  .field-label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .field {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.95rem;
+    border-radius: 0.8rem;
+    background: #fff;
+    border: 1.5px solid var(--color-line-strong);
+    color: var(--color-ink);
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+  .field::placeholder {
+    color: #8795a1;
+  }
+  .field:hover {
+    border-color: #a9bccb;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-action);
+    box-shadow: 0 0 0 4px rgb(10 108 176 / 0.14);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+  .field[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 4px rgb(180 35 24 / 0.12);
+  }
+  textarea.field {
+    min-height: 9rem;
+    resize: vertical;
+  }
+  select.field {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%2350606E' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+  .field-error {
+    margin-top: 0.4rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-danger);
+  }
+  .field-hint {
+    margin-top: 0.35rem;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+  }
+
+  /* ── Article typography (Insights, product descriptions) ──────────── */
+  .prose-g {
+    color: var(--color-body);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+  .prose-g > * + * {
+    margin-top: 1.15em;
+  }
+  .prose-g h2 {
+    margin-top: 2.2em;
+    font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.85rem);
+  }
+  .prose-g h3 {
+    margin-top: 1.8em;
+    font-size: 1.25rem;
+  }
+  .prose-g h2 + *,
+  .prose-g h3 + * {
+    margin-top: 0.7em;
+  }
+  .prose-g a {
+    color: var(--color-action);
+    text-decoration: underline;
+    text-decoration-color: rgb(10 108 176 / 0.35);
+    text-decoration-thickness: 1.5px;
+  }
+  .prose-g a:hover {
+    text-decoration-color: currentColor;
+  }
+  .prose-g strong {
+    color: var(--color-ink);
+    font-weight: 650;
+  }
+  .prose-g ul,
+  .prose-g ol {
+    padding-left: 1.4em;
+  }
+  .prose-g ul {
+    list-style: none;
+    padding-left: 1.6em;
+  }
+  .prose-g ul > li {
+    position: relative;
+  }
+  .prose-g ul > li::before {
+    content: "";
+    position: absolute;
+    left: -1.25em;
+    top: 0.72em;
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 0 60% 0 60%;
+    background: linear-gradient(135deg, #9bd96b, #41b183);
+    transform: rotate(-12deg);
+  }
+  .prose-g ol {
+    list-style: decimal;
+  }
+  .prose-g ol > li::marker {
+    color: var(--color-action);
+    font-weight: 600;
+  }
+  .prose-g li + li {
+    margin-top: 0.45em;
+  }
+  .prose-g blockquote {
+    position: relative;
+    padding: 0.4em 0 0.4em 1.4em;
+    font-family: var(--font-display);
+    font-size: 1.2em;
+    line-height: 1.55;
+    color: var(--color-ink);
+  }
+  .prose-g blockquote::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    bottom: 0.2em;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--grad-line);
+  }
+  .prose-g code {
+    padding: 0.12em 0.4em;
+    border-radius: 6px;
+    background: var(--color-mist);
+    color: var(--color-action-strong);
+    font-size: 0.9em;
+  }
+  .prose-g hr {
+    margin-block: 2.2em;
+    height: 2px;
+    border: 0;
+    background: var(--grad-line);
+    opacity: 0.5;
+  }
+}
+
+/* ── Section washes and patterns ──────────────────────────────────────
+   Each section takes one wash so neighbouring sections never match. The
+   patterns sit at 4–7 % strength: texture, not decoration to read. */
+
+@layer components {
+  .wash-lavender {
+    background:
+      radial-gradient(60rem 30rem at 100% 0%, rgb(155 217 107 / 0.08), transparent 60%),
+      linear-gradient(160deg, var(--color-lavender) 0%, #f3f6fd 55%, var(--color-skywash) 100%);
+  }
+  .wash-peach {
+    background:
+      radial-gradient(50rem 26rem at 0% 100%, rgb(32 167 219 / 0.07), transparent 60%),
+      linear-gradient(170deg, var(--color-warm) 0%, var(--color-peach) 100%);
+  }
+  .wash-warm {
+    background: linear-gradient(180deg, var(--color-warm) 0%, #fdfcfa 100%);
+  }
+  .wash-sky {
+    background:
+      radial-gradient(48rem 28rem at 0% 0%, rgb(196 181 253 / 0.18), transparent 60%),
+      linear-gradient(165deg, var(--color-skywash) 0%, #f7f9ff 60%, var(--color-lavender) 100%);
+  }
+  .wash-mint {
+    background:
+      radial-gradient(46rem 26rem at 100% 100%, rgb(255 199 163 / 0.16), transparent 60%),
+      linear-gradient(165deg, var(--color-mintwash) 0%, #f7fbfa 60%, var(--color-skywash) 100%);
+  }
+  /* Hero mesh: the brand's blue and lime with lavender and peach, all soft. */
+  .wash-hero {
+    background:
+      radial-gradient(42rem 30rem at 88% 8%, rgb(32 167 219 / 0.16), transparent 62%),
+      radial-gradient(36rem 26rem at 8% 0%, rgb(196 181 253 / 0.22), transparent 62%),
+      radial-gradient(40rem 26rem at 0% 100%, rgb(155 217 107 / 0.18), transparent 62%),
+      radial-gradient(34rem 22rem at 62% 100%, rgb(255 199 163 / 0.2), transparent 62%),
+      #ffffff;
+  }
+  .pattern-dots {
+    background-image: radial-gradient(rgb(8 126 205 / 0.13) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+  }
+  .pattern-hex {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48' viewBox='0 0 56 48'%3E%3Cpath d='M14 1 27 8.5v15L14 31 1 23.5v-15ZM42 17l13 7.5v15L42 47l-13-7.5v-15Z' fill='none' stroke='%23087ecd' stroke-opacity='0.07' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 56px 48px;
+  }
+  /* A pattern layer that fades out toward the edges of its section. */
+  .pattern-fade {
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, #000 30%, transparent 80%);
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, #000 30%, transparent 80%);
+  }
+}
+
+/* ── Scroll reveal ────────────────────────────────────────────────────
+   Content is visible by default. Only once the client script confirms it
+   can observe (html.js-reveal) are elements lowered and faded, and the
+   observer raises them as they enter the viewport. With reduced motion, or
+   without JavaScript, nothing is ever hidden. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 900ms var(--ease-out-soft),
+      transform 900ms var(--ease-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0) * 90ms);
+  }
+  .js-reveal [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Brand motion ───────────────────────────────────────────────────── */
+
+@keyframes g-float {
+  0% { transform: translate3d(0, -9px, 0) rotate(-1.6deg); }
+  100% { transform: translate3d(0, 9px, 0) rotate(1.6deg); }
+}
+@keyframes g-spin { to { transform: rotate(360deg); } }
+@keyframes g-spin-rev { to { transform: rotate(-360deg); } }
+@keyframes g-sway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes g-trail {
+  0% { stroke-dashoffset: 0; opacity: 0.25; }
+  45% { opacity: 0.9; }
+  100% { stroke-dashoffset: -420; opacity: 0.25; }
+}
+@keyframes g-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+@keyframes g-draw {
+  from { stroke-dashoffset: var(--len, 1200); }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes g-rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes g-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes g-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(8px, -12px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes g-sheen {
+  0% { transform: translateX(-90px); }
+  55%, 100% { transform: translateX(400px); }
+}
+@keyframes g-word {
+  0%, 30% { opacity: 0; transform: translateY(10px); }
+  36%, 60% { opacity: 1; transform: none; }
+  66%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+.motion-safe-only {
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Pause decorative loops when the tab is hidden or off-screen (set by JS). */
+[data-paused="true"] * {
+  animation-play-state: paused !important;
+}
+
+/* ── First-visit intro: "Science in motion" (see src/lib/intro.ts) ─────────
+   Palette: midnight #10152b, indigo #414a83, lavender #e8e5f7, cyan #9ce8e8.
+   Timeline (≈2 s, any tap or key skips):
+     0–0.65 s   nodes fly in from all sides and lock into a ring; particles
+                twinkle and molecule clusters drift in the background
+     0.38–0.8 s bonds draw; then a spark keeps travelling round the ring,
+                the ring turns and its nodes pulse in sequence
+     0.6–1.1 s  emblem appears with two ripples; two orbits with electrons
+                circle it and the emblem floats gently
+     0.82–1.3 s name reveals letter by letter · 1.18–1.6 s slogan
+     1.65–2.05 s the overlay fades into the real page, which rises into place
+   Only transform/opacity (and one stroke dash offset) animate. The overlay is
+   display:none once dismissed, which stops every looping animation. */
+.intro {
+  display: none;
+}
+html[data-intro] .intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 70% at 50% 42%, #414a83 0%, #232a57 34%, #10152b 72%);
+  animation: intro-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.65s forwards;
+}
+html[data-intro="skip"] .intro {
+  animation: intro-out-fast 0.22s ease-out forwards;
+}
+html[data-intro] #main {
+  animation: intro-page 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 1.65s both;
+}
+html[data-intro="skip"] #main {
+  animation-duration: 0.3s;
+  animation-delay: 0s;
+}
+
+/* Background: glow, twinkling particles, drifting molecule clusters. */
+.intro-glow {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(92vmin, 680px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(156 232 232 / 0.24), rgb(232 229 247 / 0.08) 55%, transparent);
+  animation:
+    intro-fade-in 0.9s ease-out both,
+    intro-breathe 1.6s ease-in-out 0.9s infinite alternate;
+}
+.intro-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #e8e5f7;
+  box-shadow: 0 0 6px 1px rgb(232 229 247 / 0.55);
+  opacity: 0;
+  animation: intro-twinkle 2s ease-in-out infinite alternate;
+}
+.intro-cluster {
+  position: absolute;
+  opacity: 0;
+  animation:
+    intro-cluster-in 0.9s ease-out forwards,
+    intro-cluster-drift 3s ease-in-out infinite alternate;
+}
+.intro-cluster svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 640px) {
+  .intro-cluster {
+    scale: 0.65;
+  }
+}
+
+/* The central composition. */
+.intro-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px;
+  text-align: center;
+  animation: intro-lift 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.65s forwards;
+}
+.intro-mark {
+  position: relative;
+  width: clamp(160px, 46vw, 230px);
+  aspect-ratio: 1;
+}
+/* Soft light behind the emblem — a gradient on its own layer rather than a
+   filter on the logo, so the artwork itself stays perfectly crisp. */
+.intro-halo {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(156 232 232 / 0.28), rgb(156 232 232 / 0.08) 60%, transparent);
+  opacity: 0;
+  animation: intro-show 0.6s ease-out 0.6s forwards;
+}
+.intro-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: intro-settle 0.5s ease 1.1s forwards;
+}
+.intro-hex {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  animation: intro-turn 14s linear 0.7s infinite;
+}
+.intro-bond {
+  stroke: #9ce8e8;
+  stroke-opacity: 0.75;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: intro-draw 0.4s ease-out both;
+}
+.intro-pulse {
+  stroke: #f2fdfd;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 0.07 0.93;
+  opacity: 0;
+  animation:
+    intro-show 0.3s ease-out 0.82s forwards,
+    intro-run 1.1s linear 0.82s infinite;
+}
+.intro-node {
+  fill: #e8e5f7;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    intro-fly 0.62s cubic-bezier(0.2, 0.75, 0.25, 1) both,
+    intro-node-pulse 0.9s ease-in-out infinite;
+}
+.intro-node:nth-child(2n) {
+  fill: #9ce8e8;
+}
+.intro-ripple {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  border: 1.5px solid rgb(156 232 232 / 0.55);
+  opacity: 0;
+  animation: intro-ripple 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.62s forwards;
+}
+.intro-ripple-2 {
+  animation-delay: 0.86s;
+}
+/* ORBITS — two tilted ellipses with an electron each, done in 2D: the orbit is
+   a circle squashed by scaleY and tilted; the electron counter-rotates and
+   counter-scales, so it travels the ellipse while staying a round dot.
+   A: radius 122 (inset -11%), squash 0.36, tilt -18deg, 2.6 s.
+   B: radius 116 (inset -8%), squash 0.42, tilt 32deg, 3.4 s, reversed.
+   The SVG ellipses in IntroSplash draw the matching paths. */
+.intro-orbit-line {
+  stroke: #9ce8e8;
+  stroke-opacity: 0.4;
+  stroke-width: 0.9;
+  opacity: 0;
+  animation: intro-show 0.5s ease-out 0.75s forwards;
+}
+.intro-orbit-line-b {
+  stroke: #e8e5f7;
+  stroke-opacity: 0.32;
+  animation-delay: 0.9s;
+}
+.intro-orbit {
+  position: absolute;
+  inset: -11%;
+  transform: rotate(-18deg) scaleY(0.36);
+  opacity: 0;
+  animation: intro-show 0.5s ease-out 0.75s forwards;
+}
+.intro-orbit-b {
+  inset: -8%;
+  transform: rotate(32deg) scaleY(0.42);
+  animation-delay: 0.9s;
+}
+.intro-spin {
+  position: absolute;
+  inset: 0;
+  animation: intro-spin 2.6s linear infinite;
+}
+.intro-orbit-b .intro-spin {
+  animation: intro-spin-rev 3.4s linear infinite;
+}
+.intro-electron {
+  position: absolute;
+  top: -4px;
+  left: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9ce8e8;
+  box-shadow: 0 0 10px 3px rgb(156 232 232 / 0.75);
+  animation: intro-electron-a 2.6s linear infinite;
+}
+.intro-orbit-b .intro-electron {
+  background: #e8e5f7;
+  box-shadow: 0 0 10px 3px rgb(232 229 247 / 0.7);
+  animation: intro-electron-b 3.4s linear infinite;
+}
+.intro-emblem {
+  position: absolute;
+  left: 23%;
+  top: 18.9%;
+  width: 54%;
+  animation: intro-logo 0.55s cubic-bezier(0.3, 1.35, 0.5, 1) 0.6s both;
+}
+.intro-float {
+  position: relative;
+  animation: intro-float 1.4s ease-in-out 1.15s infinite alternate;
+}
+.intro-float img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* A single light sweep, masked to the emblem's own pixels so the artwork is never covered. */
+.intro-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 38%, rgb(255 255 255 / 0.65) 50%, transparent 62%) 130% 0 / 260% 100% no-repeat;
+  -webkit-mask: url("/brand/genesis-emblem-hd.webp") center / contain no-repeat;
+  mask: url("/brand/genesis-emblem-hd.webp") center / contain no-repeat;
+  animation: intro-sheen 0.55s ease-in-out 1s both;
+}
+.intro-name {
+  margin-top: clamp(22px, 4vh, 34px);
+  padding-left: 0.3em; /* balances the trailing letter-spacing */
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 3.9vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  line-height: 1.35;
+  color: #fff;
+  text-wrap: balance;
+}
+.intro-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.intro-ch {
+  display: inline-block;
+  animation: intro-ch 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(0.82s + var(--i) * 17ms);
+}
+.intro-slogan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: clamp(0.8rem, 3.2vw, 1rem);
+  letter-spacing: 0.08em;
+  color: rgb(232 229 247 / 0.9);
+  animation: intro-rise 0.42s cubic-bezier(0.2, 0.7, 0.2, 1) 1.18s both;
+}
+.intro-slogan::before {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #9ce8e8, transparent);
+}
+
+@keyframes intro-out {
+  to { opacity: 0; visibility: hidden; }
+}
+@keyframes intro-out-fast {
+  to { opacity: 0; visibility: hidden; }
+}
+@keyframes intro-page {
+  from { opacity: 0; transform: translateY(16px); }
+}
+/* Translate only: scaling the stage on exit would resample (soften) the logo. */
+@keyframes intro-lift {
+  to { transform: translateY(-10px); }
+}
+@keyframes intro-fade-in {
+  from { opacity: 0; scale: 0.85; }
+}
+@keyframes intro-breathe {
+  to { scale: 1.1; opacity: 0.85; }
+}
+@keyframes intro-show {
+  to { opacity: 1; }
+}
+@keyframes intro-twinkle {
+  from { opacity: 0.08; transform: translateY(8px) scale(0.7); }
+  to { opacity: 0.9; transform: translateY(-12px) scale(1.15); }
+}
+@keyframes intro-cluster-in {
+  to { opacity: 0.26; }
+}
+@keyframes intro-cluster-drift {
+  to { transform: translate(16px, -20px) rotate(14deg); }
+}
+@keyframes intro-settle {
+  to { opacity: 0.7; }
+}
+@keyframes intro-turn {
+  to { rotate: 360deg; }
+}
+@keyframes intro-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes intro-run {
+  to { stroke-dashoffset: -1; }
+}
+@keyframes intro-fly {
+  from { opacity: 0; transform: translate(var(--fx), var(--fy)) scale(0.5); }
+  60% { opacity: 1; }
+}
+@keyframes intro-node-pulse {
+  0%, 70%, 100% { scale: 1; }
+  35% { scale: 1.45; }
+}
+@keyframes intro-ripple {
+  from { opacity: 0.85; transform: scale(0.6); }
+  to { opacity: 0; transform: scale(2); }
+}
+@keyframes intro-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes intro-spin-rev {
+  to { transform: rotate(-360deg); }
+}
+@keyframes intro-electron-a {
+  from { transform: rotate(0deg) scaleY(2.7778); }
+  to { transform: rotate(-360deg) scaleY(2.7778); }
+}
+@keyframes intro-electron-b {
+  from { transform: rotate(0deg) scaleY(2.381); }
+  to { transform: rotate(360deg) scaleY(2.381); }
+}
+@keyframes intro-logo {
+  from { opacity: 0; transform: scale(0.7); }
+}
+@keyframes intro-float {
+  to { transform: translateY(-5px); }
+}
+@keyframes intro-sheen {
+  from { background-position: 130% 0; opacity: 1; }
+  to { background-position: -30% 0; opacity: 0.6; }
+}
+@keyframes intro-ch {
+  from { opacity: 0; transform: translateY(12px) scale(0.9); color: #9ce8e8; }
+}
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* ── Internal navigation: page enter + molecular progress line ─────────── */
+.page-enter {
+  animation: page-enter 0.22s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(6px); }
+}
+.nav-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 90;
+  height: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.nav-progress-bar {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, #414a83, var(--color-sky), #9ce8e8);
+}
+.nav-progress-node {
+  position: absolute;
+  top: -2px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #9ce8e8;
+  box-shadow: 0 0 0 3px rgb(156 232 232 / 0.25);
+  transform: translateX(0);
+}
+.nav-progress[data-state="loading"] {
+  opacity: 1;
+}
+.nav-progress[data-state="loading"] .nav-progress-bar {
+  transform: scaleX(0.82);
+  transition: transform 2.4s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+.nav-progress[data-state="loading"] .nav-progress-node {
+  transform: translateX(82vw);
+  transition: transform 2.4s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+.nav-progress[data-state="done"] {
+  opacity: 0;
+  transition: opacity 0.25s ease 0.15s;
+}
+.nav-progress[data-state="done"] .nav-progress-bar {
+  transform: scaleX(1);
+  transition: transform 0.15s ease-out;
+}
+.nav-progress[data-state="done"] .nav-progress-node {
+  transform: translateX(100vw);
+  transition: transform 0.15s ease-out;
+}
+
+/* ── Page-transition veil (see RouteTransition.tsx) ────────────────────────
+   A light veil in the site's own lavender/warm-white wash — never a dark or
+   white flash — with the emblem inside a small turning molecular ring: a
+   compact echo of the intro. Opacity and transform only; the looping parts
+   run only while the veil is showing. */
+.route-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse 70% 60% at 50% 45%, var(--color-lavender) 0%, var(--color-warm) 72%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.15s ease-out,
+    visibility 0s linear 0.15s;
+}
+.route-veil[data-state="in"] {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.15s ease-out,
+    visibility 0s;
+}
+.route-veil[data-state="out"] {
+  opacity: 0;
+  visibility: visible;
+  transition:
+    opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear 0.22s;
+}
+.route-veil-mark {
+  position: relative;
+  width: 112px;
+  aspect-ratio: 1;
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.route-veil[data-state="in"] .route-veil-mark {
+  transform: scale(1);
+}
+.route-veil[data-state="out"] .route-veil-mark {
+  transform: scale(1.03) translateY(-4px);
+}
+.route-veil-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: intro-turn 6s linear infinite paused;
+}
+.route-veil-bonds {
+  stroke: #414a83;
+  stroke-opacity: 0.28;
+  stroke-width: 1;
+}
+.route-veil-spark {
+  stroke: var(--color-sky);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 0.12 0.88;
+  animation: intro-run 0.9s linear infinite paused;
+}
+.route-veil-node {
+  fill: #414a83;
+  fill-opacity: 0.55;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: intro-node-pulse 0.6s ease-in-out infinite paused;
+}
+.route-veil[data-state="in"] :is(.route-veil-ring, .route-veil-spark, .route-veil-node),
+.route-veil[data-state="out"] :is(.route-veil-ring, .route-veil-spark, .route-veil-node) {
+  animation-play-state: running;
+}
+.route-veil-emblem {
+  position: absolute;
+  left: 25%;
+  top: 21%;
+  width: 50%;
+  height: auto;
+}
+
+/* Certification tiles: a gentle lift on hover, nothing more. */
+.cert-tile {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cert-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-ring), var(--shadow-soft);
+}

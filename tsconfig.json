@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    /* Unit tests run the pure modules in src/lib directly under Node's type
+       stripping, which needs real ".ts" extensions on relative imports.
+       Nothing is emitted from this config, so allowing them is safe. */
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": ["node_modules", ".next", ".data"]
+}

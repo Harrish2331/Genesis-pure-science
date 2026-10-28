@@ -1,0 +1,37 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+
+# env files — .env.example is documentation and ships
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Local content store (filesystem driver). Runtime state, never source.
+/.data
+
+# test artefacts
+/.test-data
+/.shots
+
+# local tool settings
+.claude/

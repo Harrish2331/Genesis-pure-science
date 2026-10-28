@@ -1,0 +1,7 @@
+# Never upload local secrets, runtime data or the source artwork.
+.env*
+!.env.example
+.data
+.test-data
+.shots
+source-assets
