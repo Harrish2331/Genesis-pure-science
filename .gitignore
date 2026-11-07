@@ -35,3 +35,6 @@ next-env.d.ts
 
 # local tool settings
 .claude/
+
+# brand design package (large binaries; not part of the website)
+/design-package/

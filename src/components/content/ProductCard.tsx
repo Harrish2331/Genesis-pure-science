@@ -40,11 +40,14 @@ export async function ProductCard({
   product,
   headingLevel = "h3",
   eager = false,
+  reveal = true,
 }: {
   product: Product;
   headingLevel?: "h2" | "h3";
   /** Load at once: for the first cards of a listing, which are above the fold. */
   eager?: boolean;
+  /** Scroll-reveal the card; off where the listing animates its own cards. */
+  reveal?: boolean;
 }) {
   const meta = categoryMeta(product.category);
   const H = headingLevel;
@@ -56,7 +59,7 @@ export async function ProductCard({
   return (
     <article
       className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] bg-white shadow-[0_0_0_1px_rgb(201_215_225/0.75),0_1px_2px_rgb(16_42_67/0.04),0_14px_34px_-18px_rgb(16_42_67/0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgb(32_167_219/0.45),0_24px_48px_-22px_rgb(8_87_143/0.38)]"
-      data-reveal
+      data-reveal={reveal ? "" : undefined}
     >
       <span
         className="absolute inset-x-6 top-0 z-10 h-[3px] origin-center scale-x-0 rounded-b-full bg-[image:var(--grad-line)] transition-transform duration-500 group-hover:scale-x-100"

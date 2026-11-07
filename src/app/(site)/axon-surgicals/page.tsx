@@ -76,7 +76,9 @@ export default async function AxonPage() {
                 ) : null}
               </div>
             </div>
-            <div className="card flex items-center justify-center p-10 md:p-14" data-reveal>
+            <div className="relative flex items-center justify-center p-6 md:p-10" data-reveal>
+              {/* No frame: the transparent logo sits on the hero's own background, lifted by a soft light. */}
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,rgb(255_255_255/0.9),rgb(255_255_255/0.35)_55%,transparent)]" aria-hidden="true" />
               <Image
                 src="/brand/axon-surgicals-logo.png"
                 alt="Axon Surgicals — Better Surgical Solutions"
@@ -84,7 +86,7 @@ export default async function AxonPage() {
                 height={908}
                 priority
                 sizes="(min-width: 1024px) 460px, 86vw"
-                className="h-auto w-full max-w-[26rem]"
+                className="relative h-auto w-full max-w-[26rem]"
               />
             </div>
           </div>

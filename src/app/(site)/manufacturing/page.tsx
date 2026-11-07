@@ -112,28 +112,45 @@ export default async function ManufacturingPage() {
         </div>
       </PageHero>
 
-      {/* ── How we work ─────────────────────────────────────────────── */}
-      <section className="bg-white section-y" aria-labelledby="model-heading">
-        <div className="container-x grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <figure
-            className="relative overflow-hidden rounded-[1.75rem] shadow-[var(--shadow-ring),var(--shadow-soft)]"
-            data-reveal
-          >
+      {/* ── Our model: the map, given its own slide ───────────────────── */}
+      <section
+        className="relative isolate overflow-hidden bg-[#050d1a] py-16 md:py-24"
+        aria-labelledby="map-heading"
+      >
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_60%_at_50%_58%,rgb(32_96_170/0.28),transparent_70%)]"
+          aria-hidden="true"
+        />
+        <div className="container-x">
+          <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center" data-reveal>
+            <span className="eyebrow !text-[#9ce8e8]">Our model</span>
+            <h2 id="map-heading" className="t-section text-white">
+              Connected through partnership
+            </h2>
+          </div>
+          <figure className="relative mx-auto mt-10 max-w-[78rem] md:mt-14" data-reveal>
+            {/* Feathered into the section's own colour (sampled from the
+                map's edges), so the map reads as one surface, not a framed picture. */}
             <Image
               src="/images/manufacturing/manufacturing-network.webp"
-              alt="Illustration of a pharmaceutical manufacturing and distribution network"
+              alt="Illustration of a pharmaceutical manufacturing and distribution network over a world map"
               width={1774}
               height={887}
-              sizes="(min-width: 1024px) 560px, 100vw"
-              loading="eager"
-              className="h-auto w-full"
+              sizes="(min-width: 1280px) 1248px, 100vw"
+              className="h-auto w-full [mask-image:radial-gradient(ellipse_54%_54%_at_50%_50%,#000_66%,transparent_100%)]"
             />
-            <figcaption className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-[0.72rem] font-medium text-muted">
+            <figcaption className="mt-3 text-center text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white/55">
               Illustrative image
             </figcaption>
           </figure>
+        </div>
+      </section>
+
+      {/* ── How we work ─────────────────────────────────────────────── */}
+      <section className="bg-white section-y" aria-labelledby="model-heading">
+        <div className="container-x grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
           <div className="flex flex-col gap-5" data-reveal>
-            <span className="eyebrow">Our model</span>
+            <span className="eyebrow">How we work</span>
             <h2 id="model-heading" className="t-section">
               Made by specialist partners, brought to market by Genesis
             </h2>
@@ -143,27 +160,27 @@ export default async function ManufacturingPage() {
               page are taken from each partner&rsquo;s own company profile and
               are credited to that partner.
             </p>
-            <ul className="grid gap-3 text-[0.95rem] text-body">
-              {[
-                `${partners.length} manufacturing partner${partners.length === 1 ? "" : "s"}${profiled.length ? `, ${profiled.length} with a published profile` : ""}`,
-                forms.length
-                  ? `${forms.length} dosage forms across the ${products.length} products in the Genesis range`
-                  : "",
-                certified.length
-                  ? "Certification marks shown exactly as each partner states them"
-                  : "",
-              ]
-                .filter(Boolean)
-                .map((t) => (
-                  <li key={t} className="flex gap-3">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-mintwash)] text-leaf">
-                      <CheckIcon size={14} />
-                    </span>
-                    {t}
-                  </li>
-                ))}
-            </ul>
           </div>
+          <ul className="grid gap-3 text-[0.95rem] text-body" data-reveal>
+            {[
+              `${partners.length} manufacturing partner${partners.length === 1 ? "" : "s"}${profiled.length ? `, ${profiled.length} with a published profile` : ""}`,
+              forms.length
+                ? `${forms.length} dosage forms across the ${products.length} products in the Genesis range`
+                : "",
+              certified.length
+                ? "Certification marks shown exactly as each partner states them"
+                : "",
+            ]
+              .filter(Boolean)
+              .map((t) => (
+                <li key={t} className="flex gap-3 rounded-2xl bg-mist px-5 py-4">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-mintwash)] text-leaf">
+                    <CheckIcon size={14} />
+                  </span>
+                  {t}
+                </li>
+              ))}
+          </ul>
         </div>
         {stats.length > 1 ? (
           <div className="container-x mt-16">

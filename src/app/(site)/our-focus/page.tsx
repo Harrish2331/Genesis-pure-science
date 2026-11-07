@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/content/ProductCard";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { EmptyState } from "@/components/sections/EmptyState";
 import { FocusExplorer, type ExplorerArea } from "@/components/sections/FocusExplorer";
-import { FocusGrid } from "@/components/sections/FocusGrid";
+import { FocusShowcase } from "@/components/sections/FocusShowcase";
 import { PageHero } from "@/components/sections/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { CopyText } from "@/components/ui/CopyText";
@@ -67,7 +67,7 @@ export default async function OurFocusPage() {
         </h2>
         <div className="pattern-dots pattern-fade pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
         <div className="container-x">
-          <FocusGrid products={products} />
+          <FocusShowcase products={products} />
         </div>
       </section>
 

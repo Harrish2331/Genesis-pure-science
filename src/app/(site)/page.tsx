@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FOCUS_AREAS, SUBCATEGORIES } from "@/content/site";
-import { CapsuleScene } from "@/components/brand/CapsuleScene";
+import { MoleculeScene } from "@/components/brand/MoleculeScene";
 import { Molecule, RibbonBackdrop } from "@/components/brand/Motifs";
 import { InsightCard } from "@/components/content/InsightCard";
 import { NoticeCard } from "@/components/content/NoticeCard";
@@ -11,7 +11,7 @@ import { ProductCard } from "@/components/content/ProductCard";
 import { BrandIntro } from "@/components/sections/BrandIntro";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { EmptyState } from "@/components/sections/EmptyState";
-import { FocusGrid } from "@/components/sections/FocusGrid";
+import { FocusShowcase } from "@/components/sections/FocusShowcase";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { ButtonLink } from "@/components/ui/Button";
 import { CopyText } from "@/components/ui/CopyText";
@@ -107,7 +107,7 @@ export default async function HomePage() {
             </ul>
           </div>
           <div className="order-1 lg:order-2">
-            <CapsuleScene className="mx-auto aspect-square w-full max-w-[19rem] sm:max-w-[26rem] lg:max-w-[36rem]" />
+            <MoleculeScene className="mx-auto aspect-square w-full max-w-[20rem] sm:max-w-[27rem] lg:max-w-[38rem]" />
           </div>
         </div>
       </section>
@@ -157,7 +157,7 @@ export default async function HomePage() {
             action={<ButtonLink href="/our-focus" variant="ghost" arrow>All focus areas</ButtonLink>}
           />
           <div className="mt-12">
-            <FocusGrid products={products} />
+            <FocusShowcase products={products} />
           </div>
         </div>
       </section>
@@ -222,7 +222,8 @@ export default async function HomePage() {
         <div className="container-x">
           <div className="relative isolate grid overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#eef6fc] via-white to-[#e9f7f6] shadow-[var(--shadow-ring),var(--shadow-soft)] lg:grid-cols-[0.9fr_1.1fr]" data-reveal>
             <div className="relative flex items-center justify-center p-10 md:p-14">
-              <div className="absolute inset-6 rounded-[1.5rem] bg-white shadow-[var(--shadow-ring)]" aria-hidden="true" />
+              {/* No frame: the transparent logo sits on the panel's own wash, lifted by a soft light. */}
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,rgb(255_255_255/0.95),rgb(255_255_255/0.4)_55%,transparent)]" aria-hidden="true" />
               <Image
                 src="/brand/axon-surgicals-logo.png"
                 alt="Axon Surgicals — Better Surgical Solutions"
@@ -247,9 +248,11 @@ export default async function HomePage() {
                 <ButtonLink href="/axon-surgicals" arrow>
                   Explore Axon Surgicals
                 </ButtonLink>
-                <ButtonLink href="/products?category=surgicals" variant="secondary">
-                  Surgical products
-                </ButtonLink>
+                {products.some((p) => p.category === "surgicals") ? (
+                  <ButtonLink href="/products?category=surgicals" variant="secondary">
+                    Surgical products
+                  </ButtonLink>
+                ) : null}
               </div>
             </div>
           </div>
