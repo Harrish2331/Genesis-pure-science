@@ -1,12 +1,12 @@
 import "server-only";
-import { CATEGORIES, SEARCHABLE_PAGES, SUBCATEGORIES, categoryMeta, subcategoryMeta, NOTICE_KIND_LABELS } from "@/content/site";
-import { getInsights, getNotices, getProducts } from "@/lib/content/public";
+import { CATEGORIES, SEARCHABLE_PAGES, SUBCATEGORIES, categoryMeta, subcategoryMeta } from "@/content/site";
+import { getInsights, getProducts } from "@/lib/content/public";
 import { search, type SearchDoc, type SearchHit } from "@/lib/search-core";
 import { stripMarkdown } from "@/lib/text";
 
 /** Builds the index from currently published content only. */
 export async function buildIndex(): Promise<SearchDoc[]> {
-  const [products, insights, notices] = await Promise.all([getProducts(), getInsights(), getNotices()]);
+  const [products, insights] = await Promise.all([getProducts(), getInsights()]);
 
   const docs: SearchDoc[] = [];
 
@@ -45,18 +45,6 @@ export async function buildIndex(): Promise<SearchDoc[]> {
       keywords: [a.category, a.author].filter(Boolean),
       text: [a.excerpt, stripMarkdown(a.body)].join(" "),
       date: a.publishedAt,
-    });
-  }
-
-  for (const n of notices) {
-    docs.push({
-      id: `notice-${n.id}`,
-      type: "notice",
-      title: n.title,
-      url: `/notices#${n.slug}`,
-      label: NOTICE_KIND_LABELS[n.kind],
-      text: n.summary,
-      date: n.publishedAt,
     });
   }
 

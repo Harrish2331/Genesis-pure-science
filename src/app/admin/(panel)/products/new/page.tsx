@@ -34,7 +34,7 @@ export default async function NewProduct({ searchParams }: { searchParams: Promi
     reviewNote: "",
     seoTitle: "",
     metaDescription: "",
-    sortOrder: 0,
+    sortOrder: 500, // after the seeded catalogue (Zafieon range first, then Genesis additions)
     createdAt: "",
     updatedAt: "",
   };

@@ -106,3 +106,11 @@ test("enquiry message never doubles the full stop after names ending in one", ()
     "Hello Genesis Life Sciences, I would like to enquire about manufacturing with Ravenbhel Healthcare Pvt. Ltd. Please share more details.",
   );
 });
+
+test("partners: Symbiosis, Bionexy, Heliyac and SB Lifense lead, the rest keep their order", () => {
+  const order = [...seedPartners].sort((a, b) => a.sortOrder - b.sortOrder).map((p) => p.slug);
+  assert.deepEqual(order, [
+    "symbiosis", "bionexy", "heliyac-healthcare", "sb-lifense",
+    "ravenbhel-healthcare", "philanto-wellness", "eurocrit-labs", "janus-biotech-india", "amagen-pharma",
+  ]);
+});

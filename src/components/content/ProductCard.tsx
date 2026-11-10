@@ -68,15 +68,24 @@ export async function ProductCard({
       <Link href={href} className="flex flex-1 flex-col" aria-label={`${product.name} — view product details`}>
         <div className={`relative aspect-[4/3] overflow-hidden border-b border-line bg-gradient-to-br ${STAGE[product.category]}`}>
           {product.image ? (
-            <Image
+            <>
+              {/* A soft contact shadow under the pack, painted once as a gradient. (A CSS
+                  drop-shadow filter on the image cost ~250 ms of painting per row of
+                  cards as they scrolled into view.) */}
+              <span
+                className="pointer-events-none absolute inset-x-[16%] bottom-[7%] h-[12%] rounded-[50%] bg-[radial-gradient(closest-side,rgb(16_42_67/0.16),transparent)]"
+                aria-hidden="true"
+              />
+              <Image
               src={product.image.url}
               alt={product.imageAlt}
               fill
               sizes="(min-width: 1280px) 380px, (min-width: 768px) 45vw, 92vw"
               loading={eager ? "eager" : undefined}
               fetchPriority={eager ? "high" : undefined}
-              className="object-contain p-5 drop-shadow-[0_10px_14px_rgb(16_42_67/0.12)] transition-transform duration-500 group-hover:scale-[1.04]"
-            />
+              className="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            </>
           ) : (
             <ProductVisual category={product.category} label={meta.label} />
           )}

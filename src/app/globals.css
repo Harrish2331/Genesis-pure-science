@@ -79,7 +79,6 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
     scroll-padding-top: calc(var(--nav-h) + 1rem);
   }
   @media (prefers-reduced-motion: no-preference) {
@@ -602,13 +601,16 @@
    without JavaScript, nothing is ever hidden. */
 
 @media (prefers-reduced-motion: no-preference) {
+  /* Opacity and transform only (compositor work, no layout or paint), a
+     short travel and a brisk duration, so content settles quickly while the
+     page is being scrolled. */
   .js-reveal [data-reveal] {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translate3d(0, 14px, 0);
     transition:
-      opacity 900ms var(--ease-out-soft),
-      transform 900ms var(--ease-out-soft);
-    transition-delay: calc(var(--reveal-delay, 0) * 90ms);
+      opacity 600ms var(--ease-out-soft),
+      transform 600ms var(--ease-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0) * 70ms);
   }
   .js-reveal [data-reveal].is-revealed {
     opacity: 1;
@@ -1234,7 +1236,7 @@ html[data-intro="skip"] #main {
   opacity: 1;
   visibility: visible;
   transition:
-    opacity 0.15s ease-out,
+    opacity 0.12s ease-out,
     visibility 0s;
 }
 .route-veil[data-state="out"] {

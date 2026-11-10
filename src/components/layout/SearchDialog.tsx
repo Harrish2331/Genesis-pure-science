@@ -111,7 +111,7 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
         >
           <SearchIcon size={22} className="shrink-0 text-action" />
           <label htmlFor="site-search" className="sr-only">
-            Search products, insights and notices
+            Search products, insights and pages
           </label>
           <input
             ref={inputRef}
@@ -120,7 +120,7 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
             type="search"
             autoComplete="off"
             spellCheck={false}
-            placeholder="Search products, insights, notices…"
+            placeholder="Search products, insights, pages…"
             value={q}
             onChange={(e) => {
               setQ(e.target.value);

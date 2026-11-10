@@ -6,9 +6,9 @@ import { useEffect, useRef } from "react";
 import { EMBLEM } from "@/lib/brand";
 
 /** Veil fade-in before the route is pushed — long enough to be fully opaque. */
-const COVER_MS = 150;
+const COVER_MS = 120;
 /** The veil stays at least this long from the click, so it never flickers. */
-const MIN_SHOWN_MS = 300;
+const MIN_SHOWN_MS = 240;
 /** Fade-out; matches .route-veil[data-state="out"] in globals.css. */
 const REVEAL_MS = 220;
 /** Never hold the veil longer than this, whatever happens to the request. */

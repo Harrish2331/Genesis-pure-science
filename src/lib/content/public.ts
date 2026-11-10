@@ -25,7 +25,7 @@ export const TAG = {
  * Bump when the shape of stored content changes, so the data cache (which on
  * Vercel survives redeploys) never hands new code an old-shaped object.
  */
-const CACHE_VERSION = "v7";
+const CACHE_VERSION = "v8";
 
 const cachedCollection = <K extends CollectionName>(name: K) =>
   unstable_cache(async () => (await readCollection(name)).items, ["genesis", CACHE_VERSION, "collection", name], {
@@ -78,10 +78,15 @@ export function showCopy(c: Copy): ShownCopy {
 
 /* ── Products ─────────────────────────────────────────────────────────── */
 
-/** Category order (Women's Health, General Medicine, Surgicals), then sort order, then name. */
+/**
+ * Catalogue order: sort order first (the Zafieon catalogue leads, then
+ * products added for Genesis — see src/content/products.ts), then category,
+ * then name. Every listing — catalogue, filters, focus areas, the homepage —
+ * uses this one order.
+ */
 const byOrder = (a: Product, b: Product) =>
-  PRODUCT_CATEGORIES.indexOf(a.category) - PRODUCT_CATEGORIES.indexOf(b.category) ||
   a.sortOrder - b.sortOrder ||
+  PRODUCT_CATEGORIES.indexOf(a.category) - PRODUCT_CATEGORIES.indexOf(b.category) ||
   a.name.localeCompare(b.name);
 
 export const getProducts = cache(async (): Promise<Product[]> =>

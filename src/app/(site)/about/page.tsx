@@ -1,6 +1,7 @@
 import { FOCUS_AREAS } from "@/content/site";
 import { CapsuleGlyph, CrossGlyph, LeafGlyph, Molecule, RibbonBackdrop, Sprout } from "@/components/brand/Motifs";
 import { IllustrativeImage } from "@/components/sections/IllustrativeImage";
+import { IMAGES } from "@/content/images";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero } from "@/components/sections/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
@@ -37,6 +38,7 @@ export default async function AboutPage() {
           { name: "Home", path: "/" },
           { name: "About", path: "/about" },
         ]}
+        image={IMAGES.aboutHero}
       />
 
       {/* Who we are */}
@@ -51,12 +53,7 @@ export default async function AboutPage() {
             <CopyText copy={showCopy(c.scienceFocus)} className="text-body" />
           </div>
           <div data-reveal>
-            <IllustrativeImage
-              src="/placeholder/who we are.png"
-              width={1536}
-              height={1024}
-              alt="Pharmaceutical laboratory bench with capsules, glassware and a microscope, beside a DNA helix and icons for medicine, women’s health and care"
-            />
+            <IllustrativeImage {...IMAGES.aboutWhoWeAre} sizes="(min-width: 1280px) 560px, (min-width: 1024px) 45vw, 100vw" />
           </div>
         </div>
       </section>
@@ -93,11 +90,20 @@ export default async function AboutPage() {
       <section className="wash-warm relative isolate overflow-hidden section-y" aria-labelledby="values-heading">
         <div className="pattern-dots pattern-fade pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
         <div className="container-x">
-          <div className="flex max-w-3xl flex-col gap-4" data-reveal>
-            <span className="eyebrow">Core values</span>
-            <h2 id="values-heading" className="t-section">
-              The values we work by
-            </h2>
+          <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+            <div className="flex flex-col gap-4" data-reveal>
+              <span className="eyebrow">Core values</span>
+              <h2 id="values-heading" className="t-section">
+                The values we work by
+              </h2>
+              <p className="lead">
+                Trust, quality and integrity guide how we choose our partners, how we present every product and how we work with the
+                healthcare professionals who rely on them.
+              </p>
+            </div>
+            <div data-reveal>
+              <IllustrativeImage {...IMAGES.coreValues} sizes="(min-width: 1280px) 680px, (min-width: 1024px) 54vw, 100vw" />
+            </div>
           </div>
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {settings.values.items.map((v, i) => (
@@ -122,12 +128,7 @@ export default async function AboutPage() {
       <section className="wash-sky section-y" aria-labelledby="quality-heading">
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center">
           <div data-reveal>
-            <IllustrativeImage
-              src="/placeholder/commitment to quality.png"
-              width={1448}
-              height={1086}
-              alt="Scientist in protective gloves, mask and glasses inspecting a vial and a tray of capsules in a pharmaceutical laboratory"
-            />
+            <IllustrativeImage {...IMAGES.aboutQuality} />
           </div>
           <div className="flex flex-col gap-5" data-reveal>
             <span className="eyebrow">Commitment to quality</span>

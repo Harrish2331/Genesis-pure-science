@@ -51,6 +51,18 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  /**
+   * Retired pages. Notices were withdrawn from the public site, and Axon
+   * Surgicals is now presented within Our Focus → Surgicals; old links and
+   * search results land on the right place instead of a 404.
+   */
+  async redirects() {
+    return [
+      { source: "/notices", destination: "/", permanent: true },
+      { source: "/axon-surgicals", destination: "/our-focus#surgicals", permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

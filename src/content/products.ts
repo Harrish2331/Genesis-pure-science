@@ -610,8 +610,47 @@ const sharedRange: Entry[] = [
   },
 ];
 
+/**
+ * Zafieon Pharma's own catalogue order (CATALOGUE_ORDER in Zafieon's product
+ * data), which the shared range follows here. Listed by slug, so a typo or a
+ * missing record fails loudly instead of silently reordering the catalogue.
+ */
+const ZAFIEON_ORDER = [
+  "femulet",
+  "florabet-ll",
+  "zyfolic",
+  "meta-coq",
+  "proluvia-aq",
+  "zyfolic-q4",
+  "iro-cal",
+  "iro-plus",
+  "femi-dros-30",
+  "femi-dros-20",
+  "miso-pro",
+  "let-bloom",
+  "mifiprine",
+  "ferrin-xt",
+  "luna-35",
+] as const;
+
+const zafieonRange = ZAFIEON_ORDER.map((slug) => {
+  const e = sharedRange.find((r) => r.slug === slug);
+  if (!e) throw new Error(`Zafieon catalogue order names an unknown product: ${slug}`);
+  return e;
+});
+if (zafieonRange.length !== sharedRange.length) throw new Error("Every shared-range product must be named in ZAFIEON_ORDER.");
+
+/** Products featured on the homepage: the first six of the Zafieon catalogue. */
+const HOMEPAGE_FEATURED = 6;
+
+/**
+ * Catalogue order, used everywhere products are listed (sortOrder, ascending):
+ *   1–99     the Zafieon Pharma catalogue, in Zafieon's order
+ *   101–     products added for Genesis: women's health, then general medicine
+ * Products added later in the dashboard default to 500, after both.
+ */
 export const seedProducts: Product[] = [
-  ...womensHealth.map((e, i) => record(e, i + 1)),
-  ...sharedRange.map((e, i) => record(e, 20 + i)),
-  ...generalMedicine.map((e, i) => record(e, i + 1)),
+  ...zafieonRange.map((e, i) => ({ ...record(e, i + 1), featured: i < HOMEPAGE_FEATURED })),
+  ...womensHealth.map((e, i) => ({ ...record(e, 101 + i), featured: false })),
+  ...generalMedicine.map((e, i) => ({ ...record(e, 101 + womensHealth.length + i), featured: false })),
 ];

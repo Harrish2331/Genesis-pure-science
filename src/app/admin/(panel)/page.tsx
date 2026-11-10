@@ -22,7 +22,7 @@ const SEV: Record<CheckItem["severity"], { label: string; cls: string }> = {
 };
 
 type Editorial = {
-  kind: "Notice" | "Insight";
+  kind: "Insight";
   id: string;
   title: string;
   status: string;
@@ -62,24 +62,12 @@ export default async function Dashboard({
       ReturnType<typeof readCollection<K>>
     >["items"];
   };
-  const notices: Editorial[] = byName.notices.map((n) => ({
-    ...n,
-    kind: "Notice",
-    base: "/admin/notices",
-  }));
   const insights: Editorial[] = byName.insights.map((a) => ({
     ...a,
     kind: "Insight",
     base: "/admin/insights",
   }));
   const editorial = [
-    {
-      label: "Notices",
-      href: "/admin/notices",
-      newHref: "/admin/notices/new",
-      t: tally(notices),
-      total: notices.length,
-    },
     {
       label: "Insights",
       href: "/admin/insights",
@@ -88,7 +76,7 @@ export default async function Dashboard({
       total: insights.length,
     },
   ];
-  const recent = [...notices, ...insights]
+  const recent = [...insights]
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
     .slice(0, 8);
   const counts = Object.fromEntries(
@@ -123,14 +111,11 @@ export default async function Dashboard({
         title="Dashboard"
         description={
           isAdmin
-            ? "Manage notices, Insights, products, partners and company information. Changes go live as soon as they are saved."
-            : "Manage notices and Insights articles. Changes go live as soon as they are saved."
+            ? "Manage Insights, products, partners and company information. Changes go live as soon as they are saved."
+            : "Manage Insights articles. Changes go live as soon as they are saved."
         }
         actions={
           <>
-            <Link href="/admin/notices/new" className="btn btn-primary btn-sm">
-              New notice
-            </Link>
             <Link href="/admin/insights/new" className="btn btn-primary btn-sm">
               New insight
             </Link>
@@ -245,7 +230,7 @@ export default async function Dashboard({
           </ul>
         ) : (
           <p className="mt-4 text-sm text-muted">
-            Nothing yet. Create a notice or an article to get started.
+            Nothing yet. Create an article to get started.
           </p>
         )}
       </section>

@@ -34,8 +34,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     })),
     { url: absoluteUrl("/manufacturing"), changeFrequency: "monthly", priority: 0.6 },
-    { url: absoluteUrl("/axon-surgicals"), changeFrequency: "monthly", priority: 0.6 },
-    { url: absoluteUrl("/notices"), changeFrequency: "weekly", priority: 0.6 },
     { url: absoluteUrl("/insights"), changeFrequency: "weekly", priority: 0.7 },
     { url: absoluteUrl("/contact"), changeFrequency: "yearly", priority: 0.6 },
     { url: absoluteUrl("/privacy-policy"), changeFrequency: "yearly", priority: 0.2 },

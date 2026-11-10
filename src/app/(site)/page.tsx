@@ -4,11 +4,12 @@ import { FOCUS_AREAS, SUBCATEGORIES } from "@/content/site";
 import { MoleculeScene } from "@/components/brand/MoleculeScene";
 import { Molecule, RibbonBackdrop } from "@/components/brand/Motifs";
 import { InsightCard } from "@/components/content/InsightCard";
-import { NoticeCard } from "@/components/content/NoticeCard";
 import { NetworkCertifications } from "@/components/content/Certifications";
 import { PartnerLogoWall } from "@/components/content/PartnerLogoWall";
 import { ProductCard } from "@/components/content/ProductCard";
-import { BrandIntro } from "@/components/sections/BrandIntro";
+import { IllustrativeImage } from "@/components/sections/IllustrativeImage";
+import { IntroVideo } from "@/components/sections/IntroVideo";
+import { IMAGES } from "@/content/images";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { EmptyState } from "@/components/sections/EmptyState";
 import { FocusShowcase } from "@/components/sections/FocusShowcase";
@@ -16,7 +17,7 @@ import { StatsBand } from "@/components/sections/StatsBand";
 import { ButtonLink } from "@/components/ui/Button";
 import { CopyText } from "@/components/ui/CopyText";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { getInsights, getNotices, getPartners, getProducts, getSettings, showCopy, showFact } from "@/lib/content/public";
+import { getInsights, getPartners, getProducts, getSettings, showCopy, showFact } from "@/lib/content/public";
 import { pageMetadata } from "@/lib/seo";
 import { whatsappUrl } from "@/lib/whatsapp";
 
@@ -27,7 +28,7 @@ export async function generateMetadata() {
     ...pageMetadata({
       title: "Genesis Pure Lifesciences",
       description:
-        "Genesis Pure Lifesciences is a pharmaceutical company focused on women’s health and general medicine. Explore our focus areas, products, manufacturing partners and latest updates.",
+        "Genesis Pure Lifesciences is a pharmaceutical company focused on women’s health and general medicine. Explore our focus areas, products, manufacturing partners and latest insights.",
       path: "/",
     }),
     title: { absolute: "Genesis Pure Lifesciences — Excellence In Every Molecule" },
@@ -35,17 +36,13 @@ export async function generateMetadata() {
 }
 
 export default async function HomePage() {
-  const [settings, products, partners, notices, insights] = await Promise.all([
-    getSettings(),
-    getProducts(),
-    getPartners(),
-    getNotices(),
-    getInsights(),
-  ]);
+  const [settings, products, partners, insights] = await Promise.all([getSettings(), getProducts(), getPartners(), getInsights()]);
   const c = settings.copy;
   const tagline = showFact(settings.brand.tagline);
   const wa = showFact(settings.contact.whatsapp);
   const waHref = wa ? whatsappUrl(wa.value, settings.contact.whatsappMessage) : null;
+  // Products flagged "Featured" (the first six of the Zafieon catalogue), in
+  // catalogue order; the first six products if none is flagged.
   const featured = (products.some((p) => p.featured) ? products.filter((p) => p.featured) : products).slice(0, 6);
   const axonRelationship = showFact(settings.axon.relationship);
   // Figures for the statistics band — all computed, none typed in.
@@ -118,7 +115,12 @@ export default async function HomePage() {
         <div className="pattern-hex pattern-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
         <div className="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div data-reveal>
-            <BrandIntro videoUrl={settings.intro.videoUrl} poster={settings.intro.poster} />
+            {/* The company film, once one is set in the dashboard; until then the supplied image. */}
+            {settings.intro.videoUrl ? (
+              <IntroVideo src={settings.intro.videoUrl} poster={settings.intro.poster?.url} />
+            ) : (
+              <IllustrativeImage {...IMAGES.homeWhoWeAre} sizes="(min-width: 1280px) 600px, (min-width: 1024px) 46vw, 100vw" />
+            )}
           </div>
           <div className="flex flex-col gap-5" data-reveal>
             <span className="eyebrow">About Genesis</span>
@@ -245,7 +247,7 @@ export default async function HomePage() {
                 </p>
               ) : null}
               <div className="mt-2 flex flex-wrap gap-3">
-                <ButtonLink href="/axon-surgicals" arrow>
+                <ButtonLink href="/our-focus#surgicals" arrow>
                   Explore Axon Surgicals
                 </ButtonLink>
                 {products.some((p) => p.category === "surgicals") ? (
@@ -259,33 +261,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 7 · Notices ────────────────────────────────────────────── */}
-      <section className="wash-mint relative isolate overflow-hidden section-y" aria-labelledby="notices-heading">
-        <div className="pattern-dots pattern-fade pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
-        <div className="container-x">
-          <SectionHeader
-            eyebrow="Notice"
-            title={<span id="notices-heading">Notices and announcements</span>}
-            intro="Product announcements, launches and company updates from Genesis Pure Lifesciences."
-            action={<ButtonLink href="/notices" variant="ghost" arrow>All notices</ButtonLink>}
-          />
-          <div className="mt-12">
-            {notices.length ? (
-              <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {notices.slice(0, 3).map((n) => (
-                  <li key={n.id}>
-                    <NoticeCard notice={n} />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <EmptyState title="No notices at the moment">Announcements and product updates will appear here.</EmptyState>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 8 · Latest Insights ────────────────────────────────────── */}
+      {/* ── 7 · Latest Insights ────────────────────────────────────── */}
       <section className="wash-lavender relative isolate overflow-hidden section-y" aria-labelledby="insights-heading">
         <div className="container-x">
           <SectionHeader
@@ -312,7 +288,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 9 · Contact CTA ────────────────────────────────────────── */}
+      {/* ── 8 · Contact CTA ────────────────────────────────────────── */}
       <div className="relative">
         <Molecule className="pointer-events-none absolute left-[6%] top-0 hidden opacity-60 lg:block" size={60} />
         <CtaBand whatsappHref={waHref} />

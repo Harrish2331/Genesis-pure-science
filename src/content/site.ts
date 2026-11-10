@@ -1,4 +1,4 @@
-import type { Availability, NoticeKind, ProductCategory, SubcategoryId } from "@/lib/content/types";
+import type { Availability, ProductCategory, SubcategoryId } from "@/lib/content/types";
 
 /**
  * Structural site configuration: navigation, category labels and the static
@@ -12,8 +12,6 @@ export const mainNav = [
   { label: "Our Focus", href: "/our-focus" },
   { label: "Products", href: "/products" },
   { label: "Manufacturing", href: "/manufacturing" },
-  { label: "Axon Surgicals", href: "/axon-surgicals" },
-  { label: "Notices", href: "/notices" },
   { label: "Insights", href: "/insights" },
   { label: "Contact Us", href: "/contact" },
 ] as const;
@@ -103,6 +101,8 @@ export type FocusTile = {
   tint: "lavender" | "sky" | "peach" | "mint" | "blue" | "teal";
   category: ProductCategory;
   sub?: SubcategoryId;
+  /** A brand presented within the area (Surgicals → Axon Surgicals). */
+  brand?: string;
 };
 
 export const FOCUS_TILES: FocusTile[] = [
@@ -111,8 +111,26 @@ export const FOCUS_TILES: FocusTile[] = [
   { id: "fertility", label: "Fertility", short: "Products used in fertility care.", href: "/products?category=womens-health&sub=fertility", icon: "sprout", tint: "peach", category: "womens-health", sub: "fertility" },
   { id: "womens-wellness", label: "Women’s Wellness", short: "Nutritional products for women’s everyday health.", href: "/products?category=womens-health&sub=womens-wellness", icon: "heart", tint: "mint", category: "womens-health", sub: "womens-wellness" },
   { id: "general-medicine", label: "General Medicine", short: "A growing general pharmaceutical range.", href: "/products?category=general-medicine", icon: "capsule", tint: "blue", category: "general-medicine" },
-  { id: "surgicals", label: "Surgicals", short: "Surgical products for clinical and hospital settings.", href: "/our-focus#surgicals", icon: "cross", tint: "teal", category: "surgicals" },
+  { id: "surgicals", label: "Surgicals", short: "Surgical products for clinical and hospital settings, from Axon Surgicals.", href: "/our-focus#surgicals", icon: "cross", tint: "teal", category: "surgicals", brand: "Axon Surgicals" },
 ];
+
+/**
+ * Axon Surgicals, presented within Our Focus → Surgicals. Describes the
+ * focus of the range only: no certification, capability or relationship is
+ * stated here (the relationship line comes from Settings and shows only once
+ * it is confirmed there).
+ */
+export const AXON_SURGICALS = {
+  name: "Axon Surgicals",
+  tagline: "Better Surgical Solutions",
+  logo: { src: "/brand/axon-surgicals-logo.png", width: 1400, height: 908, alt: "Axon Surgicals — Better Surgical Solutions" },
+  description: [
+    "Axon Surgicals is dedicated to surgical products for clinical and hospital settings — the instruments and consumables that operating theatres, wards and clinics depend on every day.",
+    "Every product is chosen with quality and reliability first, because in surgical care each one has to perform exactly as expected, every time. Clear product information supports the clinicians and procurement teams who use and source them.",
+    "Behind the range is a simple commitment to healthcare: helping surgical teams deliver safe, dependable care to their patients.",
+  ],
+  points: ["Focused on surgical care", "Quality and reliability first", "Clear product information", "Committed to patient care"],
+} as const;
 
 export const subcategoryMeta = (id: SubcategoryId) => SUBCATEGORIES.find((s) => s.id === id)!;
 export const subcategoriesOf = (category: ProductCategory) => SUBCATEGORIES.filter((s) => s.parent === category);
@@ -127,13 +145,6 @@ export const AVAILABILITY_LABELS: Record<Availability, string> = {
   discontinued: "Discontinued",
 };
 
-export const NOTICE_KIND_LABELS: Record<NoticeKind, string> = {
-  announcement: "Announcement",
-  "product-launch": "Product launch",
-  "coming-soon": "Coming soon",
-  update: "Business update",
-};
-
 /** Static pages offered by site search, with the words people might type. */
 export const SEARCHABLE_PAGES = [
   { id: "page-home", title: "Home", url: "/", label: "Page", keywords: ["genesis", "pure lifesciences", "pharmaceutical"] },
@@ -141,8 +152,7 @@ export const SEARCHABLE_PAGES = [
   { id: "page-focus", title: "Our Focus", url: "/our-focus", label: "Page", keywords: ["focus", "categories", "therapy areas", "women's health", "general medicine"] },
   { id: "page-products", title: "Products", url: "/products", label: "Page", keywords: ["catalogue", "catalog", "range", "portfolio"] },
   { id: "page-manufacturing", title: "Manufacturing Partners", url: "/manufacturing", label: "Page", keywords: ["manufacturing", "partners", "symbiosis", "bionexy", "sb lifense"] },
-  { id: "page-axon", title: "Axon Surgicals", url: "/axon-surgicals", label: "Page", keywords: ["axon", "surgical", "surgicals"] },
-  { id: "page-notices", title: "Notices", url: "/notices", label: "Page", keywords: ["notice", "announcements", "launch", "coming soon", "updates"] },
+  { id: "page-axon", title: "Axon Surgicals — Our Focus", url: "/our-focus#surgicals", label: "Page", keywords: ["axon", "surgical", "surgicals"] },
   { id: "page-insights", title: "Insights", url: "/insights", label: "Page", keywords: ["insights", "articles", "news", "blog"] },
   { id: "page-contact", title: "Contact", url: "/contact", label: "Page", keywords: ["contact", "enquiry", "address", "email", "phone", "whatsapp", "gst", "gstin"] },
 ] as const;

@@ -21,6 +21,12 @@ const isActive = (pathname: string, href: string) =>
  * symbol — the approved variation "where space is limited" — so the sticky
  * bar stays slim. On small screens the symbol is used throughout and the
  * full logo heads the menu panel.
+ *
+ * The bar is fixed, with a spacer of its full height holding its place in
+ * the page. When it condenses, only the bar changes: the page under it never
+ * moves (a sticky bar changing height mid-scroll pushes the whole page up,
+ * which reads as a jolt). It has no backdrop blur: blurring the content
+ * scrolling beneath it means a fresh blur on every scroll frame.
  */
 export function Navbar({ whatsapp }: { whatsapp: WhatsAppConfig }) {
   const pathname = usePathname();
@@ -30,10 +36,21 @@ export function Navbar({ whatsapp }: { whatsapp: WhatsAppConfig }) {
   const menuRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
+    // Read the position at most once per frame; React skips the render when the value is unchanged.
+    let frame = 0;
+    const read = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 24);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(read);
+    };
+    read();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   // Keyboard shortcut: "/" or Ctrl/⌘+K opens search.
@@ -74,9 +91,11 @@ export function Navbar({ whatsapp }: { whatsapp: WhatsAppConfig }) {
 
   return (
     <>
+      {/* Holds the bar's full (top-of-page) height in the layout. */}
+      <div className="h-[calc(4.25rem+1px)] xl:h-[calc(7.5rem+1px)]" aria-hidden="true" />
       <header
-        className={`sticky top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
-          scrolled ? "bg-white/92 shadow-[0_1px_0_rgb(201_215_225/0.6),0_12px_30px_-24px_rgb(16_42_67/0.35)] backdrop-blur-xl" : "bg-white"
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300 ${
+          scrolled ? "bg-white/[0.97] shadow-[0_1px_0_rgb(201_215_225/0.6),0_12px_30px_-24px_rgb(16_42_67/0.35)]" : "bg-white"
         }`}
       >
         <a
@@ -106,7 +125,7 @@ export function Navbar({ whatsapp }: { whatsapp: WhatsAppConfig }) {
           </Link>
 
           <ul className="hidden items-center gap-0.5 xl:flex">
-            {mainNav.map((item) => {
+            {mainNav.filter((item) => item.href !== "/contact").map((item) => {
               const active = isActive(pathname, item.href);
               return (
                 <li key={item.href}>
@@ -143,6 +162,14 @@ export function Navbar({ whatsapp }: { whatsapp: WhatsAppConfig }) {
             </button>
             {/* Icon only: the floating button carries the full WhatsApp call to action. */}
             {waButton(true)}
+            {/* Contact Us: always one click away, as the bar's main call to action. */}
+            <Link
+              href="/contact"
+              aria-current={isActive(pathname, "/contact") ? "page" : undefined}
+              className="btn btn-primary btn-sm hidden whitespace-nowrap sm:inline-flex"
+            >
+              Contact Us
+            </Link>
             <button
               type="button"
               className="flex h-10 w-10 items-center justify-center rounded-full text-ink ring-1 ring-line-strong xl:hidden"

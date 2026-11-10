@@ -33,7 +33,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             Search
           </label>
           <SearchIcon size={20} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-          <input id="search-page-q" name="q" type="search" defaultValue={q} maxLength={80} placeholder="Products, insights, notices…" className="field !rounded-full !pl-12 !pr-28" />
+          <input id="search-page-q" name="q" type="search" defaultValue={q} maxLength={80} placeholder="Products, insights, pages…" className="field !rounded-full !pl-12 !pr-28" />
           <button type="submit" className="btn btn-primary btn-sm absolute right-1.5 top-1/2 -translate-y-1/2">
             Search
           </button>
@@ -70,7 +70,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
               </EmptyState>
             )
           ) : (
-            <p className="text-body">Enter at least two characters to search products, insights, notices and pages.</p>
+            <p className="text-body">Enter at least two characters to search products, insights and pages.</p>
           )}
         </div>
       </section>

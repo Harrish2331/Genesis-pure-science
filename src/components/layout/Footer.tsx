@@ -12,10 +12,8 @@ const COMPANY = [
   { label: "About Us", href: "/about" },
   { label: "Our Focus", href: "/our-focus" },
   { label: "Manufacturing", href: "/manufacturing" },
-  { label: "Axon Surgicals", href: "/axon-surgicals" },
 ];
 const UPDATES = [
-  { label: "Notices", href: "/notices" },
   { label: "Insights", href: "/insights" },
   { label: "Contact Us", href: "/contact" },
 ];

@@ -1,4 +1,5 @@
-import { FOCUS_AREAS, SUBCATEGORIES, categoryMeta, subcategoriesOf } from "@/content/site";
+import Image from "next/image";
+import { AXON_SURGICALS, FOCUS_AREAS, SUBCATEGORIES, categoryMeta, subcategoriesOf } from "@/content/site";
 import Link from "next/link";
 import { CapsuleGlyph, CrossGlyph, LeafGlyph, RibbonBackdrop } from "@/components/brand/Motifs";
 import { ProductCard } from "@/components/content/ProductCard";
@@ -8,18 +9,19 @@ import { FocusExplorer, type ExplorerArea } from "@/components/sections/FocusExp
 import { FocusShowcase } from "@/components/sections/FocusShowcase";
 import { PageHero } from "@/components/sections/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
+import { CheckIcon } from "@/components/ui/Icons";
 import { CopyText } from "@/components/ui/CopyText";
 import { getProducts, getSettings, showCopy, showFact } from "@/lib/content/public";
 import type { ProductCategory } from "@/lib/content/types";
 import { pageMetadata } from "@/lib/seo";
-import { whatsappUrl } from "@/lib/whatsapp";
+import { productEnquiryMessage, whatsappUrl } from "@/lib/whatsapp";
 
 export const revalidate = 300;
 
 export const metadata = pageMetadata({
   title: "Our Focus",
   description:
-    "Genesis Pure Lifesciences focuses on two areas: women’s health and general medicine. Explore each area and its products.",
+    "Genesis Pure Lifesciences focuses on women’s health, general medicine and surgicals, through Axon Surgicals. Explore each area and its products.",
   path: "/our-focus",
 });
 
@@ -47,6 +49,7 @@ export default async function OurFocusPage() {
     };
   });
   const wa = showFact(settings.contact.whatsapp);
+  const axonRelationship = showFact(settings.axon.relationship);
 
   return (
     <>
@@ -105,7 +108,14 @@ export default async function OurFocusPage() {
                   <h2 id={`${cat.id}-heading`} className="t-section">
                     {cat.label}
                   </h2>
-                  {copy[cat.id] ? <CopyText copy={copy[cat.id]!} className="lead" /> : null}
+                  {cat.id === "surgicals" ? (
+                    <p className="lead">
+                      Surgical products for clinical and hospital settings, presented through{" "}
+                      <span className="font-semibold text-[#01458c]">{AXON_SURGICALS.name}</span>.
+                    </p>
+                  ) : copy[cat.id] ? (
+                    <CopyText copy={copy[cat.id]!} className="lead" />
+                  ) : null}
                   <ul className="flex flex-col gap-1.5 pt-1" aria-label={`${cat.label} therapeutic areas`}>
                     {subcategoriesOf(cat.id).map((s) => {
                       const n = items.filter((p) => p.subcategories.includes(s.id)).length;
@@ -125,17 +135,29 @@ export default async function OurFocusPage() {
                     })}
                   </ul>
                   <div className="flex flex-wrap gap-3 pt-2">
-                    <ButtonLink href={cat.href} arrow>
-                      {cat.label} products
-                    </ButtonLink>
                     {cat.id === "surgicals" ? (
-                      <ButtonLink href="/axon-surgicals" variant="secondary">
-                        Axon Surgicals
+                      <ButtonLink href={`/contact?type=product&product=${encodeURIComponent(AXON_SURGICALS.name)}`} arrow>
+                        Enquire about Axon Surgicals
+                      </ButtonLink>
+                    ) : (
+                      <ButtonLink href={cat.href} arrow>
+                        {cat.label} products
+                      </ButtonLink>
+                    )}
+                    {cat.id === "surgicals" && items.length ? (
+                      <ButtonLink href={cat.href} variant="secondary">
+                        Surgical products
                       </ButtonLink>
                     ) : null}
                   </div>
                 </div>
-                <div>
+                <div className="flex flex-col gap-8">
+                  {cat.id === "surgicals" ? (
+                    <AxonPanel
+                      relationship={axonRelationship?.value}
+                      whatsappHref={wa ? whatsappUrl(wa.value, productEnquiryMessage(`${AXON_SURGICALS.name} products`)) : null}
+                    />
+                  ) : null}
                   {items.length ? (
                     <ul className="grid gap-6 sm:grid-cols-2">
                       {items.slice(0, 6).map((p) => (
@@ -144,9 +166,9 @@ export default async function OurFocusPage() {
                         </li>
                       ))}
                     </ul>
-                  ) : (
+                  ) : cat.id === "surgicals" ? null : (
                     <EmptyState title={`${cat.label} products coming soon`}>
-                      Approved product information for this area will be published here. Contact our team for surgical product enquiries.
+                      Approved product information for this area will be published here. Contact our team for product enquiries.
                     </EmptyState>
                   )}
                   {items.length > 6 ? (
@@ -165,5 +187,65 @@ export default async function OurFocusPage() {
 
       <CtaBand whatsappHref={wa ? whatsappUrl(wa.value, settings.contact.whatsappMessage) : null} />
     </>
+  );
+}
+
+/**
+ * Axon Surgicals within the Surgicals focus area: its logo, what the range
+ * stands for, and the routes to the team. Accents use Axon's own navy
+ * (#01458C) and teal (#029997) from the supplied logo.
+ */
+function AxonPanel({ relationship, whatsappHref }: { relationship?: string; whatsappHref: string | null }) {
+  return (
+    <article
+      className="relative isolate overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#eef6fc] via-white to-[#e9f7f6] shadow-[var(--shadow-ring),var(--shadow-soft)]"
+      aria-labelledby="axon-heading"
+      data-reveal
+    >
+      <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#01458c,#029997)]" aria-hidden="true" />
+      <div className="grid gap-8 p-7 md:grid-cols-[0.8fr_1.2fr] md:items-center md:p-10">
+        <div className="relative flex items-center justify-center">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,rgb(255_255_255/0.95),transparent)]" aria-hidden="true" />
+          <Image
+            src={AXON_SURGICALS.logo.src}
+            alt={AXON_SURGICALS.logo.alt}
+            width={AXON_SURGICALS.logo.width}
+            height={AXON_SURGICALS.logo.height}
+            sizes="(min-width: 768px) 260px, 70vw"
+            className="relative h-auto w-full max-w-[16rem]"
+          />
+        </div>
+        <div className="flex flex-col gap-4">
+          <span className="eyebrow !text-[#027d7b] before:!bg-[linear-gradient(90deg,#01458c,#029997)]">{AXON_SURGICALS.tagline}</span>
+          <h3 id="axon-heading" className="font-display text-[clamp(1.5rem,1.2rem+1vw,2rem)] font-semibold leading-tight tracking-[-0.02em] text-ink">
+            {AXON_SURGICALS.name}
+          </h3>
+          {AXON_SURGICALS.description.map((para) => (
+            <p key={para.slice(0, 24)} className="text-[0.98rem] leading-relaxed text-body">
+              {para}
+            </p>
+          ))}
+          {relationship ? <p className="text-sm text-muted">{relationship}</p> : null}
+        </div>
+      </div>
+      <ul className="grid gap-px border-t border-line bg-line sm:grid-cols-2" aria-label="What Axon Surgicals stands for">
+        {AXON_SURGICALS.points.map((pt) => (
+          <li key={pt} className="flex items-center gap-3 bg-white px-7 py-4 text-[0.95rem] font-medium text-ink md:px-10">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#e6f5f4] text-[#027d7b]">
+              <CheckIcon size={15} />
+            </span>
+            {pt}
+          </li>
+        ))}
+      </ul>
+      {whatsappHref ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-white px-7 py-5 md:px-10">
+          <p className="text-[0.95rem] text-body">Questions about the surgical range? Our team can help.</p>
+          <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-sm">
+            Ask on WhatsApp <span className="sr-only">(opens WhatsApp)</span>
+          </a>
+        </div>
+      ) : null}
+    </article>
   );
 }

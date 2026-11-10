@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
+import { IMAGES } from "@/content/images";
 import { ClockIcon, DocIcon, ExternalIcon, MailIcon, PhoneIcon, PinIcon, SocialIcon, WhatsAppIcon } from "@/components/ui/Icons";
 import { getSettings, showCopy, showFact } from "@/lib/content/public";
 import { pageMetadata } from "@/lib/seo";
@@ -34,6 +35,7 @@ export default async function ContactPage({ searchParams }: { searchParams: SP }
   const ct = settings.contact;
   const legal = showFact(settings.brand.legalName);
   const phone = showFact(ct.customerServicePhone);
+  const email = showFact(ct.email);
   const departments = (ct.departments ?? []).filter((d) => d.emails.length && d.confirmed);
   const wa = showFact(ct.whatsapp);
   const enquiryProduct = sp.product?.slice(0, 120).trim();
@@ -55,10 +57,31 @@ export default async function ContactPage({ searchParams }: { searchParams: SP }
           { name: "Home", path: "/" },
           { name: "Contact", path: "/contact" },
         ]}
-      />
+        image={IMAGES.contactHero}
+      >
+        {/* Calls to action: the quickest routes to the team, then the full list below. */}
+        <div className="mt-2 flex flex-wrap gap-3">
+          {waHref ? (
+            <a href={waHref} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
+              <WhatsAppIcon size={18} /> Chat on WhatsApp
+              <span className="sr-only">(opens WhatsApp)</span>
+            </a>
+          ) : null}
+          {phone ? (
+            <a href={`tel:${phone.value.replace(/[^\d+]/g, "")}`} className="btn btn-primary">
+              <PhoneIcon size={18} /> Call {phone.value}
+            </a>
+          ) : null}
+          {email ? (
+            <a href={`mailto:${email.value}`} className="btn btn-secondary">
+              <MailIcon size={18} /> Email us
+            </a>
+          ) : null}
+        </div>
+      </PageHero>
 
       {/* ── Enquiry routes ─────────────────────────────────────────── */}
-      <section className="pb-10 md:pb-14" aria-labelledby="routes-heading">
+      <section id="contact-options" className="scroll-mt-28 pb-10 pt-4 md:pb-14 md:pt-8" aria-labelledby="routes-heading">
         <div className="container-x">
           <h2 id="routes-heading" className="sr-only">
             Email and telephone

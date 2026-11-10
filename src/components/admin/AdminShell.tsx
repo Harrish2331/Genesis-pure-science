@@ -9,7 +9,6 @@ import { ROLE_LABELS, can, type Role } from "@/lib/auth/roles";
 
 const NAV = [
   { href: "/admin", label: "Dashboard", area: "" },
-  { href: "/admin/notices", label: "Notices", area: "notices" },
   { href: "/admin/insights", label: "Insights", area: "insights" },
   { href: "/admin/products", label: "Products", area: "products" },
   { href: "/admin/partners", label: "Partners", area: "partners" },

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IMAGES } from "@/content/images";
 import { FOCUS_TILES, type FocusTile } from "@/content/site";
 import { CapsuleGlyph, CrossGlyph, HeartGlyph, LeafGlyph, Molecule, Sprout } from "@/components/brand/Motifs";
 import { ArrowRight } from "@/components/ui/Icons";
@@ -38,11 +39,29 @@ const VISUAL: Partial<Record<string, string>> = {
 };
 
 /**
+ * The supplied artwork sits on a lightly tinted ground, not pure white: fade
+ * its outer edges so it melts into the section instead of showing as a box.
+ * (A static mask, painted once.)
+ */
+const ART_EDGE_FADE: React.CSSProperties = {
+  maskImage: "linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent), linear-gradient(180deg, transparent, #000 6%, #000 94%, transparent)",
+  maskComposite: "intersect",
+  WebkitMaskImage:
+    "linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent), linear-gradient(180deg, transparent, #000 6%, #000 94%, transparent)",
+  WebkitMaskComposite: "source-in",
+};
+
+/**
  * Our focus areas, composed after the supplied reference: a row of circular
  * medallions with the subject rising out of the top of each circle, then a
  * two-tone heading — a repeated lead phrase over the area's name — a short
  * caption and a "Know more" link, all centred, on a light ground with soft
  * flowing lines. Three across on desktop, two on tablet, one on phones.
+ *
+ * Where Genesis has supplied the area's artwork (IMAGES.focus in
+ * src/content/images.ts) it is shown whole — it already carries the medallion,
+ * title and caption — and the same words stay in the page as text for screen
+ * readers and search. Areas without artwork keep the composed medallion.
  */
 export function FocusShowcase({ products }: { products: Product[] }) {
   return (
@@ -62,6 +81,40 @@ export function FocusShowcase({ products }: { products: Product[] }) {
         {FOCUS_TILES.map((t, i) => {
           const Icon = ICONS[t.icon];
           const count = products.filter((p) => p.category === t.category && (!t.sub || p.subcategories.includes(t.sub))).length;
+          const art = IMAGES.focus[t.id];
+          if (art) {
+            return (
+              <li key={t.id} className="flex flex-col items-center text-center" data-reveal style={{ ["--reveal-delay" as string]: i % 3 }}>
+                <Link href={t.href} className="group block w-full max-w-[22rem]" aria-label={`${t.label} — ${count ? `${count} products` : t.brand ?? "explore"}`}>
+                  <Image
+                    src={art.src}
+                    alt={art.alt}
+                    width={art.width}
+                    height={art.height}
+                    sizes="(min-width: 1024px) 352px, (min-width: 640px) 45vw, 92vw"
+                    quality={90}
+                    className="h-auto w-full mix-blend-multiply transition-transform duration-500 ease-[var(--ease-out-soft)] group-hover:-translate-y-1.5"
+                    style={ART_EDGE_FADE}
+                  />
+                </Link>
+                <h3 className="sr-only">Excellence in {t.label}</h3>
+                <p className="sr-only">{t.short}</p>
+                {t.brand ? (
+                  <p className="-mt-1 text-sm font-semibold text-slate">
+                    by <span className="text-[#027d7b]">{t.brand}</span>
+                  </p>
+                ) : null}
+                <Link
+                  href={t.href}
+                  className="group/k mt-3 inline-flex items-center gap-2 text-sm font-semibold text-action hover:underline"
+                >
+                  Know more
+                  {count ? <span className="font-medium text-muted">· {count} product{count === 1 ? "" : "s"}</span> : null}
+                  <ArrowRight size={15} className="transition-transform group-hover/k:translate-x-0.5" />
+                </Link>
+              </li>
+            );
+          }
           const pack = products.find((p) => p.slug === VISUAL[t.id] && p.image && !p.prescriptionOnly);
           return (
             <li key={t.id} className="flex flex-col items-center text-center" data-reveal style={{ ["--reveal-delay" as string]: i % 3 }}>

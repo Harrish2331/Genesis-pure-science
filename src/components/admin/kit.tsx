@@ -367,7 +367,7 @@ export function ConfirmButton({
   );
 }
 
-/* ── Notices ───────────────────────────────────────────────────────────── */
+/* ── Form feedback ─────────────────────────────────────────────────────── */
 
 export function FormMessage({ kind, children }: { kind: "error" | "ok"; children: React.ReactNode }) {
   return (

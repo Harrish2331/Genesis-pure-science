@@ -63,3 +63,15 @@ test("catalogue: cartons bearing the Zafieon mark say so in their caption and al
     assert.match(p.imageAlt, /Zafieon/, slug);
   }
 });
+
+test("catalogue order: the Zafieon catalogue first, in Zafieon's order, then the Genesis additions", () => {
+  const zafieon = [
+    "femulet", "florabet-ll", "zyfolic", "meta-coq", "proluvia-aq", "zyfolic-q4", "iro-cal", "iro-plus",
+    "femi-dros-30", "femi-dros-20", "miso-pro", "let-bloom", "mifiprine", "ferrin-xt", "luna-35",
+  ];
+  const ordered = [...published].sort((a, b) => a.sortOrder - b.sortOrder);
+  assert.deepEqual(ordered.slice(0, zafieon.length).map((p) => p.slug), zafieon);
+  assert.equal(new Set(seedProducts.map((p) => p.sortOrder)).size, seedProducts.length, "sort orders are unique");
+  // Homepage: the first six of the Zafieon catalogue, and only those.
+  assert.deepEqual(ordered.filter((p) => p.featured).map((p) => p.slug), zafieon.slice(0, 6));
+});
