@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FOCUS_AREAS } from "@/content/site";
 import { CapsuleGlyph, CrossGlyph, LeafGlyph, Molecule, RibbonBackdrop, Sprout } from "@/components/brand/Motifs";
 import { IllustrativeImage } from "@/components/sections/IllustrativeImage";
@@ -106,20 +107,43 @@ export default async function AboutPage() {
             </div>
           </div>
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {settings.values.items.map((v, i) => (
-              <li
-                key={v.title}
-                className="card card-hover flex flex-col gap-3 p-6"
-                data-reveal
-                style={{ ["--reveal-delay" as string]: i }}
-              >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-mint">
-                  <Sprout size={24} />
-                </span>
-                <h3 className="t-card">{v.title}</h3>
-                <p className="text-[0.95rem] leading-relaxed text-body">{v.text}</p>
-              </li>
-            ))}
+            {settings.values.items.map((v, i) => {
+              // Each value's picture comes from the image registry, by title.
+              const img = IMAGES.values[v.title.trim().toLowerCase()];
+              return (
+                <li
+                  key={v.title}
+                  className="card card-hover group flex flex-col overflow-hidden"
+                  data-reveal
+                  style={{ ["--reveal-delay" as string]: i }}
+                >
+                  {img ? (
+                    <div className="relative aspect-[16/10] overflow-hidden bg-mist">
+                      {/* Cards share one frame so the row lines up; a slight
+                          zoom trims the thin borders some supplied files carry. */}
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        width={img.width}
+                        height={img.height}
+                        sizes="(min-width: 1024px) 240px, (min-width: 640px) 45vw, 100vw"
+                        quality={85}
+                        className="h-full w-full scale-[1.04] object-cover transition-transform duration-500 group-hover:scale-[1.08]"
+                      />
+                    </div>
+                  ) : null}
+                  <div className="flex flex-1 flex-col gap-3 p-6">
+                    {img ? null : (
+                      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-mint">
+                        <Sprout size={24} />
+                      </span>
+                    )}
+                    <h3 className="t-card">{v.title}</h3>
+                    <p className="text-[0.95rem] leading-relaxed text-body">{v.text}</p>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>

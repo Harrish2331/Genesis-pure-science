@@ -47,7 +47,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // suppressHydrationWarning: the intro script may set data-intro on <html> before React hydrates.
-    <html lang="en-IN" className={`${sora.variable} ${inter.variable}`} suppressHydrationWarning>
+    // data-scroll-behavior: the CSS smooth scrolling (for in-page anchors) is
+    // switched off while Next.js resets the scroll on a page change, so a new
+    // page opens at its top instead of gliding up from the old position.
+    <html lang="en-IN" className={`${sora.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* Must run before first paint, so it is inline rather than loaded. */}
         <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />

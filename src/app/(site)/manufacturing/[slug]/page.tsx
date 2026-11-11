@@ -97,7 +97,24 @@ export default async function PartnerPage({ params }: { params: Params }) {
                   priority
                 />
               </div>
-            ) : null}
+            ) : (
+              // No logo supplied yet: the name set in type, as on the partner
+              // cards — a logo is never drawn or approximated.
+              <div
+                className="hidden min-h-56 flex-col items-center justify-center gap-3 rounded-[1.75rem] lg:flex bg-gradient-to-br from-[#f5f2ff] to-[#eef6fe] p-10 text-center shadow-[var(--shadow-ring),var(--shadow-soft)]"
+                data-reveal
+              >
+                <span className="font-display text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] font-semibold leading-tight tracking-[-0.02em] text-ink">
+                  {partner.name}
+                </span>
+                {partner.region ? (
+                  <span className="flex items-center gap-1.5 text-sm text-body">
+                    <PinIcon size={15} className="text-action" />
+                    {partner.region}
+                  </span>
+                ) : null}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -194,7 +211,8 @@ export default async function PartnerPage({ params }: { params: Params }) {
 
       {partner.productRanges.length || partner.registrations.length ? (
         <section className="bg-white section-y" aria-labelledby="ranges-heading">
-          <div className="container-x grid gap-8 md:grid-cols-2">
+          {/* Two columns only when both lists are present; one list takes the full width. */}
+          <div className={`container-x grid gap-8 ${partner.productRanges.length && partner.registrations.length ? "md:grid-cols-2" : ""}`}>
             {partner.productRanges.length ? (
               <div data-reveal>
                 <h2 id="ranges-heading" className="t-card">

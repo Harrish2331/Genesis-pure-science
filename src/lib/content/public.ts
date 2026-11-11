@@ -25,7 +25,7 @@ export const TAG = {
  * Bump when the shape of stored content changes, so the data cache (which on
  * Vercel survives redeploys) never hands new code an old-shaped object.
  */
-const CACHE_VERSION = "v8";
+const CACHE_VERSION = "v9";
 
 const cachedCollection = <K extends CollectionName>(name: K) =>
   unstable_cache(async () => (await readCollection(name)).items, ["genesis", CACHE_VERSION, "collection", name], {

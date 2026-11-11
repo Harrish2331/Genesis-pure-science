@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/sections/EmptyState";
 import { FocusExplorer, type ExplorerArea } from "@/components/sections/FocusExplorer";
 import { FocusShowcase } from "@/components/sections/FocusShowcase";
 import { PageHero } from "@/components/sections/PageHero";
+import { IMAGES } from "@/content/images";
 import { ButtonLink } from "@/components/ui/Button";
 import { CheckIcon } from "@/components/ui/Icons";
 import { CopyText } from "@/components/ui/CopyText";
@@ -62,6 +63,7 @@ export default async function OurFocusPage() {
           { name: "Our Focus", path: "/our-focus" },
         ]}
         motif="sprout"
+        image={IMAGES.focusHero}
       />
 
       <section className="wash-warm relative isolate overflow-hidden section-y !pt-10" aria-labelledby="overview-heading">

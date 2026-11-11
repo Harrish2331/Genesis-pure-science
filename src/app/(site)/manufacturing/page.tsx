@@ -6,6 +6,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { CertificationRow } from "@/components/content/Certifications";
 import { EmptyState } from "@/components/sections/EmptyState";
 import { PageHero } from "@/components/sections/PageHero";
+import { IMAGES } from "@/content/images";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { ButtonLink } from "@/components/ui/Button";
 import { CheckIcon, ShieldIcon, WhatsAppIcon } from "@/components/ui/Icons";
@@ -99,6 +100,7 @@ export default async function ManufacturingPage() {
           { name: "Home", path: "/" },
           { name: "Manufacturing", path: "/manufacturing" },
         ]}
+        image={IMAGES.manufacturingHero}
       >
         <div className="flex flex-wrap gap-3 pt-2">
           <ButtonLink href="#partners" arrow>

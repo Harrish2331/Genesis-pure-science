@@ -151,7 +151,7 @@ export const SEARCHABLE_PAGES = [
   { id: "page-about", title: "About Genesis", url: "/about", label: "Page", keywords: ["company", "who we are", "vision", "mission", "values", "quality"] },
   { id: "page-focus", title: "Our Focus", url: "/our-focus", label: "Page", keywords: ["focus", "categories", "therapy areas", "women's health", "general medicine"] },
   { id: "page-products", title: "Products", url: "/products", label: "Page", keywords: ["catalogue", "catalog", "range", "portfolio"] },
-  { id: "page-manufacturing", title: "Manufacturing Partners", url: "/manufacturing", label: "Page", keywords: ["manufacturing", "partners", "symbiosis", "bionexy", "sb lifense"] },
+  { id: "page-manufacturing", title: "Manufacturing Partners", url: "/manufacturing", label: "Page", keywords: ["manufacturing", "partners", "symbiosis", "bionexy", "sb lifesciences", "sb lifense"] },
   { id: "page-axon", title: "Axon Surgicals — Our Focus", url: "/our-focus#surgicals", label: "Page", keywords: ["axon", "surgical", "surgicals"] },
   { id: "page-insights", title: "Insights", url: "/insights", label: "Page", keywords: ["insights", "articles", "news", "blog"] },
   { id: "page-contact", title: "Contact", url: "/contact", label: "Page", keywords: ["contact", "enquiry", "address", "email", "phone", "whatsapp", "gst", "gstin"] },

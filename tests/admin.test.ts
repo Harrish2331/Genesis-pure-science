@@ -107,10 +107,10 @@ test("enquiry message never doubles the full stop after names ending in one", ()
   );
 });
 
-test("partners: Symbiosis, Bionexy, Heliyac and SB Lifense lead, the rest keep their order", () => {
+test("partners: Symbiosis, Bionexy, Heliyac and SB Lifesciences lead, the rest keep their order", () => {
   const order = [...seedPartners].sort((a, b) => a.sortOrder - b.sortOrder).map((p) => p.slug);
   assert.deepEqual(order, [
-    "symbiosis", "bionexy", "heliyac-healthcare", "sb-lifense",
+    "symbiosis", "bionexy", "heliyac-healthcare", "sb-lifesciences",
     "ravenbhel-healthcare", "philanto-wellness", "eurocrit-labs", "janus-biotech-india", "amagen-pharma",
   ]);
 });

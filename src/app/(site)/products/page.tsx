@@ -5,6 +5,7 @@ import { ProductExplorer, type ExplorerItem } from "@/components/content/Product
 import { CtaBand } from "@/components/sections/CtaBand";
 import { EmptyState } from "@/components/sections/EmptyState";
 import { PageHero } from "@/components/sections/PageHero";
+import { IMAGES } from "@/content/images";
 import { ButtonLink } from "@/components/ui/Button";
 import { getProducts, getSettings, showFact } from "@/lib/content/public";
 import { PRODUCT_CATEGORIES, SUBCATEGORY_IDS, SUBCATEGORY_PARENT, type ProductCategory, type SubcategoryId } from "@/lib/content/types";
@@ -80,6 +81,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: SP 
           { name: "Home", path: "/" },
           { name: "Products", path: "/products" },
         ]}
+        image={IMAGES.productsHero}
       />
 
       {all.length ? (

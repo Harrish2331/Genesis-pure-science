@@ -289,11 +289,82 @@ export const seedPartners: Partner[] = [
     logo: { url: "/partners/amagen-pharma.webp", key: "static/partners/amagen-pharma.webp", width: 900, height: 900, contentType: "image/webp" },
     reviewNote: `${SIX_NOTE} Interim profile: no brochure or website supplied. The supplied logo is a photograph of signage; flat or vector artwork would sit better beside the other marks.`,
   }),
+  /**
+   * SB Lifesciences: supplied to Genesis as "SB Lifense", with the company's
+   * own website (sblifesciences.com) as the reference, read on 11 November
+   * 2026. That site names the company SB Lifesciences Pvt. Ltd. throughout.
+   * Every detail below is the company's own statement there, credited to it.
+   * Left out on purpose: the "ISO 9001:2008" claim (that edition of the
+   * standard was withdrawn in 2018), the company's sales figures, and its
+   * direct phone and email (enquiries come to Genesis).
+   */
   partner({
     id: "partner-sb-lifense",
-    slug: "sb-lifense",
-    name: "SB Lifense",
+    slug: "sb-lifesciences",
+    name: "SB Lifesciences",
+    fullName: "SB Lifesciences Pvt. Ltd.",
     sortOrder: 4,
-    reviewNote: "Spelling supplied as “SB Lifense” — confirm the exact registered name, plus logo, website and a verified profile.",
+    tagline: "Third-party pharmaceutical manufacturing from Baddi, Himachal Pradesh, since 2013.",
+    location: "India",
+    region: "Himachal Pradesh · Haryana",
+    description:
+      "SB Lifesciences Pvt. Ltd. was established in 2013 and manufactures and trades pharmaceutical formulations in India. It works as a third-party manufacturer, producing medicines for pharmaceutical companies that market them under their own names.\n\nThe company states that it manufactures across a wide range of dosage forms — tablets, including beta-lactam tablets, capsules, soft gelatin capsules, hormone tablets, syrups, suspensions and dry syrups, injectables, ointments, creams, lotions and sachets — with more than 500 products in its range.\n\nIts factory is in the EPIP Phase-1 industrial area at Jharmajri, Baddi, in Himachal Pradesh, with a corporate office in Panchkula, Haryana. The company describes its units as having large-scale production capacity, qualified quality-control staff, its own storage facility and its own transport for delivery across India, and states that each product is tested before it is released to the market.",
+    capabilities: [
+      "Tablets",
+      "Capsules",
+      "Soft gelatin capsules",
+      "Syrups & suspensions",
+      "Injectables",
+      "Hormone tablets",
+      "Beta-lactam tablets",
+      "Dry syrups",
+      "Ointments",
+      "Creams",
+      "Lotions",
+      "Sachets",
+      "Protein powders",
+      "Gargles",
+    ],
+    certifications: ["WHO", "GMP"],
+    sites: [
+      { name: "Manufacturing unit", location: "Plot No. 45, EPIP Phase-1, Jharmajri, Baddi – 173205, Himachal Pradesh", role: "Factory" },
+      { name: "Corporate office", location: "363, 1st Floor, Industrial Area Phase-2, Panchkula – 134113, Haryana", role: "Office" },
+    ],
+    productRanges: [
+      "Infertility & gynaecology",
+      "Haematinics",
+      "Calcium preparations",
+      "Multivitamins",
+      "Anti-inflammatory",
+      "Antibiotic",
+      "Anti-diabetic",
+      "Anti-hypertensive",
+      "Anti-allergic & antihistamine",
+      "Anti-cold",
+      "Antiviral",
+      "Anti-asthmatic",
+      "Antispasmodic",
+      "Antipyretic",
+      "Anticonvulsant",
+      "Antidepressant",
+      "Antipsychotic",
+      "Neuro",
+      "Insomnia",
+      "Muscle relaxants",
+      "Corticosteroids",
+      "Gastro-resistant",
+      "Chewable, mouth-dissolving & dispersible",
+      "PDE inhibitors",
+      "Skin",
+      "Uro",
+    ],
+    notes: [
+      "SB Lifesciences gives 2013 as its year of establishment; the same website also cites “16+ years of experience”. The year of establishment is shown here.",
+    ],
+    sourceNote:
+      "Information from SB Lifesciences' own website (sblifesciences.com). Dosage forms, product ranges, sites and certification marks are the partner's own statements; certificate documents were not supplied.",
+    website: "https://sblifesciences.com",
+    reviewNote:
+      "Supplied as “SB Lifense”; the reference link Genesis shared (sblifesciences.com) names the company SB Lifesciences Pvt. Ltd. Confirm this is the same company, and supply its logo with permission to show it. Its website also claims ISO 9001:2008 (a withdrawn edition) — supply a current certificate if one should be shown.",
   }),
 ];

@@ -69,12 +69,57 @@ export const IMAGES = {
     alt: "Scientist in protective gloves, mask and glasses inspecting a vial and a tray of capsules in a pharmaceutical laboratory",
   },
 
-  /** Contact Us → hero. */
-  contactHero: {
+  /**
+   * About Us → one image per core-value card, keyed by the value's title in
+   * lower case (the values themselves are edited in the dashboard). A value
+   * with no entry here shows its card without an image.
+   */
+  values: {
+    quality: { src: P("quality.png"), width: 1055, height: 702, alt: "A scientist in a mask and safety glasses examining a sample under a microscope" },
+    integrity: { src: P("integrity.png"), width: 1297, height: 641, alt: "Two scientists reviewing research data together on a laboratory screen" },
+    science: { src: P("science.png"), width: 1133, height: 767, alt: "A scientist looking through a microscope at a laboratory bench" },
+    care: { src: P("care.png"), width: 875, height: 566, alt: "A pharmacist explaining a prescription medicine to an older customer" },
+    growth: { src: P("growth.png"), width: 822, height: 452, alt: "Medicine bottles, vials and capsules in front of a rising bar chart" },
+  } as Record<string, SiteImage | null>,
+
+  /** Our Focus → hero. */
+  focusHero: {
     src: P("Trusted Care, Healthier Tomorrow.png"),
     width: 1672,
     height: 941,
     alt: "Trusted care for a healthier tomorrow — a scientist holding a capsule in a laboratory, with icons for high efficacy, better tolerance, proven quality and healthcare partnership",
+  },
+
+  /** Products → hero. */
+  productsHero: {
+    src: P("Modern Healthcare Products Display.png"),
+    width: 1672,
+    height: 941,
+    alt: "Medicine bottles, blister packs of capsules and tablets, and laboratory glassware on a bright bench",
+  },
+
+  /** Manufacturing → hero. Illustrative: not a photograph of a partner's facility. */
+  manufacturingHero: {
+    src: P("Sterile Pharmaceutical Production Line (1).png"),
+    width: 1672,
+    height: 941,
+    alt: "Technicians in protective clothing inspecting capsules on a pharmaceutical production line",
+  },
+
+  /** Insights → hero. */
+  insightsHero: {
+    src: P("Data-Driven Healthcare Research.png"),
+    width: 1671,
+    height: 941,
+    alt: "A laboratory desk with research reports, charts, glassware and a microscope, beside healthcare icons and a rising graph",
+  },
+
+  /** Contact Us → hero. */
+  contactHero: {
+    src: P("Modern Blue Contact Center Banner.png"),
+    width: 1672,
+    height: 941,
+    alt: "A support team with headsets behind a desk phone and icons for email, phone and location",
   },
 
   /**

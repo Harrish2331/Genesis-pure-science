@@ -6,6 +6,7 @@ import { InsightCard } from "@/components/content/InsightCard";
 import { Pagination } from "@/components/content/Pagination";
 import { EmptyState } from "@/components/sections/EmptyState";
 import { PageHero } from "@/components/sections/PageHero";
+import { IMAGES } from "@/content/images";
 import { ButtonLink } from "@/components/ui/Button";
 import { getInsights } from "@/lib/content/public";
 import { search } from "@/lib/search-core";
@@ -70,6 +71,7 @@ export default async function InsightsPage({ searchParams }: { searchParams: SP 
           { name: "Home", path: "/" },
           { name: "Insights", path: "/insights" },
         ]}
+        image={IMAGES.insightsHero}
       />
 
       <section className="wash-warm pb-20 pt-12 md:pb-28 md:pt-16" aria-label="Articles">
