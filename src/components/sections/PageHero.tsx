@@ -9,20 +9,22 @@ import type { SiteImage } from "@/content/images";
 
 export type Crumb = { name: string; path: string };
 
-export function Breadcrumbs({ items }: { items: Crumb[] }) {
+export function Breadcrumbs({ items, tone = "dark" }: { items: Crumb[]; tone?: "dark" | "light" }) {
+  // "light": white text, for use over a dark image.
+  const light = tone === "light";
   return (
     <>
       <nav aria-label="Breadcrumb">
-        <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.8125rem] text-muted">
+        <ol className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.8125rem] ${light ? "text-white/70" : "text-muted"}`}>
           {items.map((c, i) => (
             <li key={c.path} className="flex items-center gap-2">
-              {i > 0 ? <span aria-hidden="true" className="text-line-strong">/</span> : null}
+              {i > 0 ? <span aria-hidden="true" className={light ? "text-white/40" : "text-line-strong"}>/</span> : null}
               {i === items.length - 1 ? (
-                <span aria-current="page" className="font-medium text-ink">
+                <span aria-current="page" className={`font-medium ${light ? "text-white" : "text-ink"}`}>
                   {c.name}
                 </span>
               ) : (
-                <Link href={c.path} className="hover:text-action">
+                <Link href={c.path} className={light ? "hover:text-white" : "hover:text-action"}>
                   {c.name}
                 </Link>
               )}

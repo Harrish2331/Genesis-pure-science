@@ -7,7 +7,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { EmptyState } from "@/components/sections/EmptyState";
 import { FocusExplorer, type ExplorerArea } from "@/components/sections/FocusExplorer";
 import { FocusShowcase } from "@/components/sections/FocusShowcase";
-import { PageHero } from "@/components/sections/PageHero";
+import { MapHero } from "@/components/sections/MapHero";
 import { IMAGES } from "@/content/images";
 import { ButtonLink } from "@/components/ui/Button";
 import { CheckIcon } from "@/components/ui/Icons";
@@ -54,7 +54,7 @@ export default async function OurFocusPage() {
 
   return (
     <>
-      <PageHero
+      <MapHero
         eyebrow="Our Focus"
         title="Our areas of focus"
         intro={showCopy(c.scienceFocus)}
@@ -62,8 +62,18 @@ export default async function OurFocusPage() {
           { name: "Home", path: "/" },
           { name: "Our Focus", path: "/our-focus" },
         ]}
-        motif="sprout"
-        image={IMAGES.focusHero}
+        map={IMAGES.focusMap}
+        areas={FOCUS_AREAS.map((cat) => {
+          const n = products.filter((p) => p.category === cat.id).length;
+          return {
+            id: cat.id,
+            label: cat.label,
+            // Surgicals has no catalogue products yet; it is presented through Axon Surgicals.
+            note: n ? `${n} product${n === 1 ? "" : "s"}` : cat.id === "surgicals" ? `Through ${AXON_SURGICALS.name}` : "Products coming soon",
+            href: `#${cat.id}`,
+            motif: cat.motif,
+          };
+        })}
       />
 
       <section className="wash-warm relative isolate overflow-hidden section-y !pt-10" aria-labelledby="overview-heading">

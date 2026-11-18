@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FOCUS_AREAS, SUBCATEGORIES } from "@/content/site";
-import { MoleculeScene } from "@/components/brand/MoleculeScene";
+import { GenesisMorphScene } from "@/components/brand/GenesisMorphScene";
 import { Molecule, RibbonBackdrop } from "@/components/brand/Motifs";
 import { InsightCard } from "@/components/content/InsightCard";
 import { NetworkCertifications } from "@/components/content/Certifications";
@@ -104,7 +104,7 @@ export default async function HomePage() {
             </ul>
           </div>
           <div className="order-1 lg:order-2">
-            <MoleculeScene className="mx-auto aspect-square w-full max-w-[20rem] sm:max-w-[27rem] lg:max-w-[38rem]" />
+            <GenesisMorphScene className="mx-auto aspect-square w-full max-w-[20rem] sm:max-w-[27rem] lg:max-w-[38rem]" />
           </div>
         </div>
       </section>

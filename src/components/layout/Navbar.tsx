@@ -94,8 +94,10 @@ export function Navbar({ whatsapp }: { whatsapp: WhatsAppConfig }) {
       {/* Holds the bar's full (top-of-page) height in the layout. */}
       <div className="h-[calc(4.25rem+1px)] xl:h-[calc(7.5rem+1px)]" aria-hidden="true" />
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300 ${
-          scrolled ? "bg-white/[0.97] shadow-[0_1px_0_rgb(201_215_225/0.6),0_12px_30px_-24px_rgb(16_42_67/0.35)]" : "bg-white"
+        className={`fixed inset-x-0 top-0 z-50 bg-white transition-shadow duration-300 ${
+          // Solid white: a translucent bar lets text scrolling beneath show
+          // through as a faint ghost, most visibly over dark sections.
+          scrolled ? "shadow-[0_1px_0_rgb(201_215_225/0.6),0_12px_30px_-24px_rgb(16_42_67/0.35)]" : ""
         }`}
       >
         <a

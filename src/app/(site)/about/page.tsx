@@ -54,7 +54,7 @@ export default async function AboutPage() {
             <CopyText copy={showCopy(c.scienceFocus)} className="text-body" />
           </div>
           <div data-reveal>
-            <IllustrativeImage {...IMAGES.aboutWhoWeAre} sizes="(min-width: 1280px) 560px, (min-width: 1024px) 45vw, 100vw" />
+            <IllustrativeImage {...IMAGES.aboutWhoWeAre} caption={null} sizes="(min-width: 1280px) 560px, (min-width: 1024px) 45vw, 100vw" />
           </div>
         </div>
       </section>

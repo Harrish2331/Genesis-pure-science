@@ -39,18 +39,18 @@ export const IMAGES = {
 
   /** About Us → main hero. */
   aboutHero: {
-    src: P("Genesis About Us Reception Banner.png"),
-    width: 1013,
-    height: 803,
-    alt: "Reception area with the Genesis Pure Lifesciences logo on a feature wall above a modern reception desk",
-  },
-
-  /** About Us → "Who we are". */
-  aboutWhoWeAre: {
     src: P("Medical Scientist Examining Capsule with Healthcare Infographic.png"),
     width: 1672,
     height: 941,
     alt: "Scientist in gloves and safety glasses examining a capsule in a laboratory, beside icons for gynaecology, hormonal health, fertility, women’s wellness, general medicine and surgicals",
+  },
+
+  /** About Us → "Who we are": the Genesis office reception, so shown without the "Illustrative image" label. */
+  aboutWhoWeAre: {
+    src: P("Genesis About Us Reception Banner.png"),
+    width: 1013,
+    height: 803,
+    alt: "The reception of the Genesis Pure Lifesciences office, with the company logo on the feature wall above the reception desk",
   },
 
   /** About Us → "Core values". */
@@ -82,12 +82,16 @@ export const IMAGES = {
     growth: { src: P("growth.png"), width: 822, height: 452, alt: "Medicine bottles, vials and capsules in front of a rising bar chart" },
   } as Record<string, SiteImage | null>,
 
-  /** Our Focus → hero. */
-  focusHero: {
-    src: P("Trusted Care, Healthier Tomorrow.png"),
-    width: 1672,
-    height: 941,
-    alt: "Trusted care for a healthier tomorrow — a scientist holding a capsule in a laboratory, with icons for high efficacy, better tolerance, proven quality and healthcare partnership",
+  /**
+   * Our Focus → the full-width world map behind the page heading. Dark
+   * artwork: the heading sits over it in white. Illustrative — it does not
+   * mark countries where Genesis operates.
+   */
+  focusMap: {
+    src: "/images/manufacturing/manufacturing-network.webp",
+    width: 1774,
+    height: 887,
+    alt: "Illustration of a world map at night, with glowing connections linking cities across the continents",
   },
 
   /** Products → hero. */

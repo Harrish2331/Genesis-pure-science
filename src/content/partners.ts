@@ -363,8 +363,11 @@ export const seedPartners: Partner[] = [
     ],
     sourceNote:
       "Information from SB Lifesciences' own website (sblifesciences.com). Dosage forms, product ranges, sites and certification marks are the partner's own statements; certificate documents were not supplied.",
+    // Corporate logo supplied by Genesis (13 November 2026); the white margin
+    // is trimmed, the artwork itself is unchanged.
+    logo: { url: "/partners/sb-lifesciences.webp", key: "static/partners/sb-lifesciences.webp", width: 1200, height: 565, contentType: "image/webp" },
     website: "https://sblifesciences.com",
     reviewNote:
-      "Supplied as “SB Lifense”; the reference link Genesis shared (sblifesciences.com) names the company SB Lifesciences Pvt. Ltd. Confirm this is the same company, and supply its logo with permission to show it. Its website also claims ISO 9001:2008 (a withdrawn edition) — supply a current certificate if one should be shown.",
+      "Supplied as “SB Lifense”; the reference link Genesis shared (sblifesciences.com) names the company SB Lifesciences Pvt. Ltd. Confirm this is the same company. Its website also claims ISO 9001:2008 (a withdrawn edition) — supply a current certificate if one should be shown.",
   }),
 ];
