@@ -121,7 +121,7 @@ export default async function HomePage() {
             {settings.intro.videoUrl ? (
               <IntroVideo src={settings.intro.videoUrl} poster={settings.intro.poster?.url} />
             ) : (
-              <IllustrativeImage {...IMAGES.homeWhoWeAre} sizes="(min-width: 1280px) 600px, (min-width: 1024px) 46vw, 100vw" />
+              <IllustrativeImage {...IMAGES.homeWhoWeAre} caption={null} sizes="(min-width: 1280px) 600px, (min-width: 1024px) 46vw, 100vw" />
             )}
           </div>
           <div className="flex flex-col gap-5" data-reveal>

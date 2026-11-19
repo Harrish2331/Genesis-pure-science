@@ -36,12 +36,16 @@ export type SiteImage = {
 const P = (file: string) => `/placeholder/${file.replace(/,/g, "%2C")}`;
 
 export const IMAGES = {
-  /** Homepage → "Who we are". When an introduction video is set in the dashboard, the video is shown instead. */
+  /**
+   * Homepage → "Who we are": the Genesis office reception (the same photo as
+   * About Us → "Who we are"), so shown without the "Illustrative image" label.
+   * When an introduction video is set in the dashboard, the video is shown instead.
+   */
   homeWhoWeAre: {
-    src: P("who we are.png"),
-    width: 1536,
-    height: 1024,
-    alt: "Pharmaceutical laboratory bench with capsules, glassware and a microscope, beside a DNA helix and icons for medicine, women’s health and care",
+    src: P("Genesis About Us Reception Banner.png"),
+    width: 1013,
+    height: 803,
+    alt: "The reception of the Genesis Pure Lifesciences office, with the company logo on the feature wall above the reception desk",
   },
 
   /** About Us → main hero. */
