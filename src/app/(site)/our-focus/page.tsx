@@ -62,7 +62,7 @@ export default async function OurFocusPage() {
           { name: "Home", path: "/" },
           { name: "Our Focus", path: "/our-focus" },
         ]}
-        map={IMAGES.focusMap}
+        map={IMAGES.focusHero}
         areas={FOCUS_AREAS.map((cat) => {
           const n = products.filter((p) => p.category === cat.id).length;
           return {

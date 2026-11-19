@@ -19,6 +19,13 @@ export type SiteImage = {
   width: number;
   height: number;
   alt: string;
+  /**
+   * For an image used as a page's opening background (heroes): where the
+   * picture's subject is, as a CSS object-position (e.g. "30% 50%"). The
+   * image is cropped to fill the hero; this keeps the subject in view.
+   * Defaults to the centre.
+   */
+  focus?: string;
 };
 
 /**
@@ -43,6 +50,7 @@ export const IMAGES = {
     width: 1672,
     height: 941,
     alt: "Scientist in gloves and safety glasses examining a capsule in a laboratory, beside icons for gynaecology, hormonal health, fertility, women’s wellness, general medicine and surgicals",
+    focus: "26% 50%",
   },
 
   /** About Us → "Who we are": the Genesis office reception, so shown without the "Illustrative image" label. */
@@ -83,15 +91,16 @@ export const IMAGES = {
   } as Record<string, SiteImage | null>,
 
   /**
-   * Our Focus → the full-width world map behind the page heading. Dark
-   * artwork: the heading sits over it in white. Illustrative — it does not
-   * mark countries where Genesis operates.
+   * Our Focus → the laboratory scene behind the page heading. Dark artwork:
+   * the heading sits over its darker left side in white; the microscope,
+   * pipette and beakers show on the right.
    */
-  focusMap: {
-    src: "/images/manufacturing/manufacturing-network.webp",
-    width: 1774,
-    height: 887,
-    alt: "Illustration of a world map at night, with glowing connections linking cities across the continents",
+  focusHero: {
+    src: P("Blue Laboratory Science Background for area of focus.png"),
+    width: 1672,
+    height: 941,
+    alt: "A laboratory bench with a microscope, a pipette releasing a drop into glass beakers, capsules and a DNA helix, in blue light",
+    focus: "62% 55%",
   },
 
   /** Products → hero. */
@@ -100,6 +109,7 @@ export const IMAGES = {
     width: 1672,
     height: 941,
     alt: "Medicine bottles, blister packs of capsules and tablets, and laboratory glassware on a bright bench",
+    focus: "24% 62%",
   },
 
   /** Manufacturing → hero. Illustrative: not a photograph of a partner's facility. */
@@ -108,6 +118,7 @@ export const IMAGES = {
     width: 1672,
     height: 941,
     alt: "Technicians in protective clothing inspecting capsules on a pharmaceutical production line",
+    focus: "24% 45%",
   },
 
   /** Insights → hero. */
@@ -116,6 +127,7 @@ export const IMAGES = {
     width: 1671,
     height: 941,
     alt: "A laboratory desk with research reports, charts, glassware and a microscope, beside healthcare icons and a rising graph",
+    focus: "34% 50%",
   },
 
   /** Contact Us → hero. */
@@ -124,6 +136,29 @@ export const IMAGES = {
     width: 1672,
     height: 941,
     alt: "A support team with headsets behind a desk phone and icons for email, phone and location",
+    focus: "32% 58%",
+  },
+
+  /**
+   * The "Contact Genesis" banner at the foot of every main page — cut from
+   * the supplied "Premium Biotech Contact Banner.png" (public/placeholder).
+   * That file has its words and buttons painted in, so only its artwork is
+   * used and the banner's text and buttons stay live: the hand holding the
+   * DNA sphere (contactBanner) and the ribbon wave along its foot
+   * (contactBannerWave, decorative).
+   */
+  contactBanner: {
+    src: "/images/contact/contact-banner-art.webp",
+    width: 784,
+    height: 706,
+    alt: "A gloved hand holding a clear sphere with a DNA helix inside, above green leaves in a bright laboratory",
+    focus: "42% 45%",
+  },
+  contactBannerWave: {
+    src: "/images/contact/contact-banner-wave.webp",
+    width: 1108,
+    height: 160,
+    alt: "",
   },
 
   /**

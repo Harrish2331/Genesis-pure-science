@@ -455,7 +455,7 @@ export function GenesisMorphScene({ className }: { className?: string }) {
   return (
     <div ref={wrap} className={`relative ${className ?? ""}`} aria-hidden="true">
       {/* A soft light behind the sculpture (CSS, so it costs nothing per frame). */}
-      <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(closest-side,rgb(156_232_232/0.45),rgb(32_167_219/0.08)_60%,transparent)]" />
+      <div className="absolute left-1/2 top-1/2 aspect-square h-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(156_232_232/0.45),rgb(32_167_219/0.08)_60%,transparent)]" />
       <canvas ref={canvas} className="absolute inset-0 h-full w-full" />
     </div>
   );

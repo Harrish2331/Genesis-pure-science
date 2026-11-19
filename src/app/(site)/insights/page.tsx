@@ -4,14 +4,16 @@ import { Suspense } from "react";
 import { CatalogueSearch } from "@/components/content/CatalogueSearch";
 import { InsightCard } from "@/components/content/InsightCard";
 import { Pagination } from "@/components/content/Pagination";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { EmptyState } from "@/components/sections/EmptyState";
 import { PageHero } from "@/components/sections/PageHero";
 import { IMAGES } from "@/content/images";
 import { ButtonLink } from "@/components/ui/Button";
-import { getInsights } from "@/lib/content/public";
+import { getInsights, getSettings, showFact } from "@/lib/content/public";
 import { search } from "@/lib/search-core";
 import { pageMetadata } from "@/lib/seo";
 import { slugify } from "@/lib/text";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 const PER_PAGE = 9;
 type SP = Promise<{ q?: string; category?: string; page?: string }>;
@@ -28,7 +30,8 @@ export async function generateMetadata({ searchParams }: { searchParams: SP }): 
 
 export default async function InsightsPage({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
-  const all = await getInsights();
+  const [all, settings] = await Promise.all([getInsights(), getSettings()]);
+  const wa = showFact(settings.contact.whatsapp);
   const q = (sp.q ?? "").slice(0, 80);
 
   const categories = Array.from(new Map(all.filter((a) => a.category).map((a) => [slugify(a.category), a.category])).entries());
@@ -132,6 +135,8 @@ export default async function InsightsPage({ searchParams }: { searchParams: SP 
           )}
         </div>
       </section>
+
+      <CtaBand whatsappHref={wa ? whatsappUrl(wa.value, settings.contact.whatsappMessage) : null} />
     </>
   );
 }

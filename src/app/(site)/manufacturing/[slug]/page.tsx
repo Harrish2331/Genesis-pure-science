@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { RibbonBackdrop } from "@/components/brand/Motifs";
 import { CertificationSeal, RegulatorEmblem } from "@/components/content/Certifications";
 import { markFor, markForRegistration } from "@/lib/content/certifications";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { BackdropSection } from "@/components/sections/BackdropSection";
 import { Breadcrumbs } from "@/components/sections/PageHero";
+import { IMAGES } from "@/content/images";
 import { ButtonLink } from "@/components/ui/Button";
 import { AlertIcon, ArrowLeft, CheckIcon, DocIcon, ExternalIcon, PinIcon, ShieldIcon, WhatsAppIcon } from "@/components/ui/Icons";
 import { getPartner, getPartners, getSettings, showFact } from "@/lib/content/public";
@@ -55,10 +56,10 @@ export default async function PartnerPage({ params }: { params: Params }) {
 
   return (
     <>
-      <section className="wash-hero relative isolate overflow-hidden">
-        <div className="pattern-dots pattern-fade pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
-        <RibbonBackdrop className="pointer-events-none absolute -right-10 top-0 -z-10 h-full w-[70%] max-w-4xl" />
-        <div className="container-x relative pb-14 pt-10 md:pb-20 md:pt-14">
+      {/* The manufacturing image is the hero's background (illustrative, not
+          this partner's facility); the partner's logo heads the text. */}
+      <BackdropSection image={IMAGES.manufacturingHero} side="right" priority minHeight="lg:min-h-[34rem]">
+        <div className="flex flex-col gap-5">
           <Breadcrumbs
             items={[
               { name: "Home", path: "/" },
@@ -66,58 +67,37 @@ export default async function PartnerPage({ params }: { params: Params }) {
               { name: partner.name, path: `/manufacturing/${partner.slug}` },
             ]}
           />
-          <div className="mt-10 grid gap-10 md:mt-14 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-            <div className="flex max-w-3xl flex-col gap-5" data-reveal>
-              <span className="eyebrow">Manufacturing partner</span>
-              <h1 className="t-page">{title}</h1>
-              {partner.tagline ? <p className="lead max-w-2xl">{partner.tagline}</p> : null}
-              <div className="flex flex-wrap gap-3 pt-2">
-                {waHref ? (
-                  <ButtonLink href={waHref} variant="whatsapp">
-                    <WhatsAppIcon size={18} /> Enquire on WhatsApp
-                  </ButtonLink>
-                ) : null}
-                {partner.website ? (
-                  <ButtonLink href={partner.website} variant="secondary">
-                    Partner website <ExternalIcon size={15} />
-                    <span className="sr-only">(opens in a new tab)</span>
-                  </ButtonLink>
-                ) : null}
-              </div>
-            </div>
-            {partner.logo ? (
-              <div className="flex items-center justify-center rounded-[1.75rem] bg-white p-10 shadow-[var(--shadow-ring),var(--shadow-soft)]" data-reveal>
-                <Image
-                  src={partner.logo.url}
-                  alt={`${title} logo`}
-                  width={partner.logo.width}
-                  height={partner.logo.height}
-                  sizes="(min-width: 1024px) 380px, 80vw"
-                  className="h-auto max-h-40 w-auto max-w-full object-contain"
-                  priority
-                />
-              </div>
-            ) : (
-              // No logo supplied yet: the name set in type, as on the partner
-              // cards — a logo is never drawn or approximated.
-              <div
-                className="hidden min-h-56 flex-col items-center justify-center gap-3 rounded-[1.75rem] lg:flex bg-gradient-to-br from-[#f5f2ff] to-[#eef6fe] p-10 text-center shadow-[var(--shadow-ring),var(--shadow-soft)]"
-                data-reveal
-              >
-                <span className="font-display text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] font-semibold leading-tight tracking-[-0.02em] text-ink">
-                  {partner.name}
-                </span>
-                {partner.region ? (
-                  <span className="flex items-center gap-1.5 text-sm text-body">
-                    <PinIcon size={15} className="text-action" />
-                    {partner.region}
-                  </span>
-                ) : null}
-              </div>
-            )}
+          {partner.logo ? (
+            <span className="mt-3 inline-flex self-start rounded-2xl bg-white px-5 py-3 shadow-[var(--shadow-ring),var(--shadow-soft)]">
+              <Image
+                src={partner.logo.url}
+                alt={`${title} logo`}
+                width={partner.logo.width}
+                height={partner.logo.height}
+                sizes="240px"
+                className="h-16 w-auto max-w-[15rem] object-contain"
+                priority
+              />
+            </span>
+          ) : null}
+          <span className="eyebrow mt-1">Manufacturing partner</span>
+          <h1 className="t-page">{title}</h1>
+          {partner.tagline ? <p className="lead">{partner.tagline}</p> : null}
+          <div className="flex flex-wrap gap-3 pt-2">
+            {waHref ? (
+              <ButtonLink href={waHref} variant="whatsapp">
+                <WhatsAppIcon size={18} /> Enquire on WhatsApp
+              </ButtonLink>
+            ) : null}
+            {partner.website ? (
+              <ButtonLink href={partner.website} variant="secondary">
+                Partner website <ExternalIcon size={15} />
+                <span className="sr-only">(opens in a new tab)</span>
+              </ButtonLink>
+            ) : null}
           </div>
         </div>
-      </section>
+      </BackdropSection>
 
       <section className="bg-white section-y" aria-labelledby="about-heading">
         <div className="container-x grid gap-12 lg:grid-cols-[1.25fr_0.75fr]">

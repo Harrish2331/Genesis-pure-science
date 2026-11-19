@@ -62,8 +62,13 @@ export default async function HomePage() {
           <div className="absolute -bottom-56 -left-40 h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(closest-side,rgb(155_217_107/0.2),transparent)]" />
           <div className="absolute inset-0 bg-[radial-gradient(rgb(8_126_205/0.12)_1px,transparent_1px)] [background-size:26px_26px] [mask-image:radial-gradient(ellipse_60%_55%_at_70%_40%,#000_20%,transparent_75%)]" />
         </div>
-        <div className="container-x grid items-center gap-6 pb-10 pt-6 md:pb-16 lg:grid-cols-[1.02fr_1fr] lg:gap-10 lg:pb-20 lg:pt-10">
-          <div className="order-2 flex flex-col gap-6 lg:order-1">
+        {/* The 3D sculpture is the hero's background layer: across the right
+            of the section on wide screens, across the top on phones. */}
+        <div className="absolute inset-x-0 top-0 -z-10 h-[20rem] sm:h-[26rem] lg:inset-y-0 lg:left-auto lg:h-auto lg:w-[56%]">
+          <GenesisMorphScene className="h-full w-full" />
+        </div>
+        <div className="container-x pb-12 pt-[18rem] sm:pt-[23.5rem] md:pb-16 lg:flex lg:min-h-[40rem] lg:items-center lg:pb-20 lg:pt-10">
+          <div className="flex flex-col gap-6 lg:max-w-[38rem]">
             <CopyText copy={showCopy(c.heroEyebrow)} as="span" className="eyebrow" />
             {tagline ? (
               <>
@@ -102,9 +107,6 @@ export default async function HomePage() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="order-1 lg:order-2">
-            <GenesisMorphScene className="mx-auto aspect-square w-full max-w-[20rem] sm:max-w-[27rem] lg:max-w-[38rem]" />
           </div>
         </div>
       </section>

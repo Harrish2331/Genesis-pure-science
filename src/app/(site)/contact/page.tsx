@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero } from "@/components/sections/PageHero";
 import { IMAGES } from "@/content/images";
 import { ClockIcon, DocIcon, ExternalIcon, MailIcon, PhoneIcon, PinIcon, SocialIcon, WhatsAppIcon } from "@/components/ui/Icons";
@@ -232,6 +233,8 @@ export default async function ContactPage({ searchParams }: { searchParams: SP }
           </div>
         </div>
       </section>
+
+      <CtaBand whatsappHref={waHref} contactHref="#contact-options" />
     </>
   );
 }
