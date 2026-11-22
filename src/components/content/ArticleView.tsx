@@ -44,7 +44,7 @@ export function ArticleView({ article, shareUrl, preview }: { article: Insight; 
       <div className="container-x">
         <div className="relative mx-auto aspect-[16/8] max-w-5xl overflow-hidden rounded-[var(--radius-panel)] shadow-[var(--shadow-ring),var(--shadow-soft)]">
           {article.coverImage ? (
-            <Image src={article.coverImage.url} alt={article.coverAlt} fill priority sizes="(min-width: 1080px) 1024px, 94vw" className="object-cover" />
+            <Image src={article.coverImage.url} alt={article.coverAlt} fill priority quality={90} sizes="(min-width: 1080px) 1024px, 94vw" className="object-cover" />
           ) : (
             <InsightCoverFallback category={article.category} />
           )}

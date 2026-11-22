@@ -42,7 +42,7 @@ const STYLE: Record<Variant, { row: string; media: string; sizes: string; body: 
   feature: {
     row: "",
     media: "aspect-[16/9]",
-    sizes: "(min-width: 1024px) 700px, 92vw",
+    sizes: "(min-width: 1536px) 880px, (min-width: 1024px) 58vw, 92vw",
     body: "gap-3 p-6 lg:p-8",
     title: "font-display text-[clamp(1.4rem,1.1rem+0.9vw,1.9rem)] font-semibold leading-[1.2] tracking-[-0.02em] text-ink",
     excerpt: "line-clamp-3 text-[1.02rem] leading-relaxed",
@@ -50,7 +50,7 @@ const STYLE: Record<Variant, { row: string; media: string; sizes: string; body: 
   wide: {
     row: "lg:flex-row",
     media: "aspect-[16/10] lg:aspect-auto lg:min-h-[22rem] lg:w-[52%] lg:shrink-0",
-    sizes: "(min-width: 1024px) 620px, 92vw",
+    sizes: "(min-width: 1536px) 780px, (min-width: 1024px) 52vw, 92vw",
     body: "gap-3 p-7 lg:p-10",
     title: "font-display text-[clamp(1.4rem,1.1rem+1vw,2rem)] font-semibold leading-[1.2] tracking-[-0.02em] text-ink",
     excerpt: "line-clamp-4 text-[1.05rem] leading-relaxed",
@@ -61,7 +61,8 @@ const STYLE: Record<Variant, { row: string; media: string; sizes: string; body: 
     row: "sm:flex-row md:flex-col lg:flex-row",
     media:
       "aspect-[16/10] sm:aspect-auto sm:min-h-[11rem] sm:w-[40%] sm:shrink-0 md:aspect-[16/10] md:min-h-0 md:w-full lg:aspect-auto lg:min-h-[11rem] lg:w-[40%]",
-    sizes: "(min-width: 1024px) 220px, (min-width: 640px) 40vw, 92vw",
+    // The photo is cropped to fill a tall box, so the pixels needed follow its height, not its width.
+    sizes: "(min-width: 1024px) 820px, (min-width: 768px) 46vw, (min-width: 640px) 60vw, 92vw",
     body: "gap-2 p-5",
     title: "font-display text-[1.05rem] font-semibold leading-snug text-ink line-clamp-3",
     excerpt: "line-clamp-3 text-[0.92rem] leading-relaxed",
@@ -80,6 +81,7 @@ export function InsightCard({ insight, variant = "default" }: { insight: Insight
               alt={insight.coverAlt}
               fill
               sizes={s.sizes}
+              quality={90}
               className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
           ) : (
