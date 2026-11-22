@@ -145,7 +145,107 @@ export { seedProducts } from "./products";
 
 /* ── Insights ─────────────────────────────────────────────────────────── */
 
+/** A cover image supplied in public/insights. */
+const insightCover = (file: string, width: number, height: number) => ({
+  url: `/insights/${file}`,
+  key: `insights/${file}`,
+  width,
+  height,
+  contentType: "image/png",
+});
+
 export const seedInsights: Insight[] = [
+  /* ── Published articles ─────────────────────────────────────────────── */
+  {
+    id: "insight-biocon-pertuzumab-ec-approval",
+    slug: "biocon-pertuzumab-biosimilar-european-commission-approval",
+    title: "Biocon Secures European Commission Approval for Pertuzumab Biosimilar, Strengthening Its Global Oncology Portfolio",
+    excerpt:
+      "Biocon receives European Commission marketing authorisation for Pebrilzo®, its pertuzumab biosimilar, expanding treatment options for patients with HER2-positive breast cancer. The approval marks an important milestone under the European Medicines Agency's new tailored clinical approach to biosimilar development.",
+    body: [
+      "Biocon Limited has announced that the European Commission (EC) has granted marketing authorisation for Pebrilzo®, its pertuzumab biosimilar, for the treatment of HER2-positive breast cancer across multiple disease stages in the European Union.",
+      "Announced on November 18, 2026, the approval makes Biocon's pertuzumab the first biosimilar to receive European Commission authorisation under the European Medicines Agency's new tailored clinical approach.",
+      "Pertuzumab is a monoclonal antibody that targets the human epidermal growth factor receptor 2 (HER2), which is associated with the growth of certain breast cancer cells. The biosimilar is approved for use in combination with other cancer treatments, including trastuzumab and chemotherapy, for eligible patients with HER2-positive breast cancer.",
+      "The approval follows the product's recent US FDA approval and further strengthens Biocon's oncology portfolio. According to the company, pertuzumab becomes its fifth oncology biosimilar approved in both Europe and the United States.",
+      "This development highlights the growing role of biosimilars in improving access to advanced cancer treatments. It also demonstrates the importance of evolving regulatory pathways in supporting biosimilar development and expanding treatment availability across global healthcare markets.",
+      "**Source:** Biocon Limited – Official Press Release (18 November 2026)",
+    ].join("\n\n"),
+    coverImage: insightCover("Screenshot 2026-11-19 082918.png", 952, 747),
+    coverAlt: "The Biocon Biopharmaceuticals building, with landscaped lawns and young trees in front",
+    category: "Industry news",
+    author: "Genesis Pure Lifesciences",
+    featured: true,
+    status: "published",
+    publishedAt: "2026-11-20T06:02:00.000Z",
+    seoTitle: "",
+    metaDescription: "",
+    placeholder: false,
+    reviewNote: "",
+    createdAt: "2026-11-20T06:02:00.000Z",
+    updatedAt: "2026-11-20T06:02:00.000Z",
+  },
+  {
+    id: "insight-oppi-faster-approvals-data-exclusivity",
+    slug: "pharma-multinationals-seek-faster-approvals-data-exclusivity-india",
+    title: "Pharma Multinationals Seek Faster Drug Approval Processes and Six-Year Data Exclusivity in India",
+    excerpt:
+      "The Organisation of Pharmaceutical Producers of India (OPPI) has approached CDSCO seeking time-bound regulatory reviews for new drug applications and clinical trials. The proposal also includes a possible six-year regulatory data exclusivity period, sparking discussion about innovation, generic competition and medicine affordability in India.",
+    body: [
+      "Pharmaceutical multinational companies are pushing for faster and more predictable drug approval processes in India. The Organisation of Pharmaceutical Producers of India (OPPI) has submitted formal representations to the Central Drugs Standard Control Organisation (CDSCO), proposing changes to the country's regulatory approval framework.",
+      "One of the major recommendations is to reduce the review period for Phase I clinical trial applications involving globally developed drugs from the existing 90 days to 30 days, bringing the process closer to the US FDA's review timeline.",
+      "OPPI has also proposed introducing regulatory data exclusivity to protect clinical and regulatory data submitted by innovative pharmaceutical companies. Although the initial proposal reportedly considered a ten-year period, the organisation may revise its demand to six years, similar to the protection period recently introduced in China.",
+      "The proposal has generated debate within the Indian pharmaceutical industry. Supporters argue that stronger data protection and faster regulatory reviews could encourage research investments, clinical trials and the development of innovative medicines.",
+      "However, domestic pharmaceutical companies and patient groups have raised concerns that data exclusivity could delay generic competition and potentially affect the affordability of medicines.",
+      "The discussion represents an important policy issue for India's pharmaceutical sector, which has a strong generic medicine manufacturing base while also seeking to expand its research and innovation capabilities.",
+      "Any regulatory changes will require further consultation and consideration by the relevant authorities.",
+      "**Source:** ETPharma – Economic Times (19 November 2026)",
+    ].join("\n\n"),
+    coverImage: insightCover("Screenshot 2026-11-19 082934.png", 1332, 747),
+    coverAlt: "The Central Drugs Standard Control Organization (CDSCO) building, with its name in English and Hindi above the entrance",
+    category: "Industry news",
+    author: "Genesis Pure Lifesciences",
+    featured: false,
+    status: "published",
+    publishedAt: "2026-11-20T06:01:00.000Z",
+    seoTitle: "",
+    metaDescription: "",
+    placeholder: false,
+    reviewNote: "",
+    createdAt: "2026-11-20T06:01:00.000Z",
+    updatedAt: "2026-11-20T06:01:00.000Z",
+  },
+  {
+    id: "insight-fda-neladalkib-accelerated-approval",
+    slug: "us-fda-accelerated-approval-neladalkib-alk-positive-lung-cancer",
+    title: "US FDA Grants Accelerated Approval to Neladalkib for Previously Treated ALK-Positive Lung Cancer",
+    excerpt:
+      "The US Food and Drug Administration has granted accelerated approval to neladalkib, marketed as Nelkarmi, for certain adults with previously treated advanced ALK-positive non-small cell lung cancer. The approval introduces another targeted treatment option for patients whose disease has progressed following earlier therapies.",
+    body: [
+      "The United States Food and Drug Administration (US FDA) has granted accelerated approval to neladalkib, marketed under the brand name Nelkarmi, for adults with locally advanced or metastatic anaplastic lymphoma kinase (ALK)-positive non-small cell lung cancer (NSCLC).",
+      "The approval was announced on November 17, 2026. The medicine is intended for eligible patients whose cancer has progressed after treatment with specific ALK tyrosine kinase inhibitors (TKIs), with the precise eligibility depending on their previous treatment history.",
+      "Neladalkib is an oral kinase inhibitor designed to target ALK-driven cancer activity. Its approval was supported by results from the ALKOVE-1 clinical trial, which evaluated the drug in previously treated patients.",
+      "In the trial, the confirmed overall response rate was 49% among patients who had received one prior ALK inhibitor, alectinib, and 32% among patients who had received two or more prior ALK inhibitors and platinum-based chemotherapy.",
+      "The FDA's accelerated approval provides an additional treatment option for patients with advanced ALK-positive lung cancer, particularly those whose disease has progressed following earlier targeted therapies.",
+      "The development also reflects continued progress in precision oncology, where targeted medicines are designed to address specific molecular changes associated with cancer.",
+      "Nelkarmi is part of GSK's oncology portfolio following its acquisition of Nuvalent, completed in July 2026.",
+      "**Source:** US FDA – Cancer Drug Approvals (17 November 2026)",
+    ].join("\n\n"),
+    coverImage: insightCover("Screenshot 2026-11-19 082948.png", 1302, 748),
+    coverAlt: "Scientists in lab coats, masks and safety glasses working with samples at a laboratory bench",
+    category: "Industry news",
+    author: "Genesis Pure Lifesciences",
+    featured: false,
+    status: "published",
+    publishedAt: "2026-11-20T06:00:00.000Z",
+    seoTitle: "",
+    metaDescription: "",
+    placeholder: false,
+    reviewNote: "",
+    createdAt: "2026-11-20T06:00:00.000Z",
+    updatedAt: "2026-11-20T06:00:00.000Z",
+  },
+
+  /* ── Development placeholders (hidden on the site) ───────────────────── */
   {
     id: "sample-insight-1",
     slug: "sample-article-layout",

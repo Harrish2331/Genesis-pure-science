@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
       { pathname: "/partners/**", search: "" },
       { pathname: "/certifications/**", search: "" },
       { pathname: "/placeholder/**", search: "" },
+      { pathname: "/insights/**", search: "" },
       // Uploaded media served by the app (filesystem driver or private Blob).
       // The version lives in the path, so no query string is ever needed.
       { pathname: "/api/media/**", search: "" },
