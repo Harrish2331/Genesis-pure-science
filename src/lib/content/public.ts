@@ -27,8 +27,17 @@ export const TAG = {
  */
 const CACHE_VERSION = "v9";
 
+/**
+ * Each deployment keeps its own cache entries. The built-in content
+ * (src/content/seed.ts) ships with the code, so an older deployment that
+ * refreshes a shared entry would otherwise hand the new one its old seed —
+ * new articles would show on prerendered pages but not on /insights.
+ * Dashboard saves still expire every deployment's entries through the tags.
+ */
+const DEPLOYMENT = process.env.VERCEL_DEPLOYMENT_ID ?? process.env.VERCEL_GIT_COMMIT_SHA ?? "local";
+
 const cachedCollection = <K extends CollectionName>(name: K) =>
-  unstable_cache(async () => (await readCollection(name)).items, ["genesis", CACHE_VERSION, "collection", name], {
+  unstable_cache(async () => (await readCollection(name)).items, ["genesis", CACHE_VERSION, DEPLOYMENT, "collection", name], {
     tags: [TAG[name], "content"],
     revalidate: 300,
   });
@@ -38,7 +47,7 @@ const cached = {
   insights: cachedCollection("insights"),
   notices: cachedCollection("notices"),
   partners: cachedCollection("partners"),
-  settings: unstable_cache(async () => (await readSettings()).settings, ["genesis", CACHE_VERSION, "settings"], {
+  settings: unstable_cache(async () => (await readSettings()).settings, ["genesis", CACHE_VERSION, DEPLOYMENT, "settings"], {
     tags: [TAG.settings, "content"],
     revalidate: 300,
   }),
