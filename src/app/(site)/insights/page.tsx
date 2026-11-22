@@ -55,6 +55,11 @@ export default async function InsightsPage({ searchParams }: { searchParams: SP 
   const pages = Math.max(1, Math.ceil(rest.length / PER_PAGE));
   const page = Math.min(pages, Math.max(1, Number.parseInt(sp.page ?? "1", 10) || 1));
   const shown = rest.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+  // Page one opens with the lead article and, beside it, the next two;
+  // everything else runs in the grid below.
+  const showLead = Boolean(lead && page === 1);
+  const beside = showLead ? shown.slice(0, 2) : [];
+  const grid = showLead ? shown.slice(2) : shown;
 
   const href = (over: Record<string, string | undefined>) => {
     const p = new URLSearchParams();
@@ -107,15 +112,30 @@ export default async function InsightsPage({ searchParams }: { searchParams: SP 
                 </div>
               </div>
 
-              {lead && page === 1 ? (
-                <div className="mt-10">
-                  <InsightCard insight={lead} large />
-                </div>
+              {lead && showLead ? (
+                beside.length ? (
+                  <div className="mt-10 grid gap-6 lg:grid-cols-12">
+                    <div className="lg:col-span-7">
+                      <InsightCard insight={lead} variant="feature" />
+                    </div>
+                    <ul className="grid gap-6 md:grid-cols-2 lg:col-span-5 lg:grid-cols-1 lg:grid-rows-2">
+                      {beside.map((a) => (
+                        <li key={a.id}>
+                          <InsightCard insight={a} variant="compact" />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <div className="mt-10">
+                    <InsightCard insight={lead} variant="wide" />
+                  </div>
+                )
               ) : null}
 
-              {shown.length ? (
-                <ul className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {shown.map((a) => (
+              {grid.length ? (
+                <ul className={`mt-8 grid gap-6 md:grid-cols-2 ${grid.length > 2 ? "lg:grid-cols-3" : ""}`}>
+                  {grid.map((a) => (
                     <li key={a.id}>
                       <InsightCard insight={a} />
                     </li>
