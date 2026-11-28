@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Montserrat, Sora } from "next/font/google";
 import { googleSiteVerification, isPreviewDeployment, siteUrl } from "@/lib/env";
 import { INTRO_SCRIPT } from "@/lib/intro";
 import "./globals.css";
@@ -14,6 +14,8 @@ import "./globals.css";
  */
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+/** Only for the typeset GENESIS wordmark in the navigation bar: the closest match to the logo lettering’s wide geometric capitals. */
+const montserrat = Montserrat({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-brand", display: "swap" });
 
 const DESCRIPTION =
   "Genesis Pure Lifesciences is a pharmaceutical company focused on women’s health and general medicine.";
@@ -50,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // data-scroll-behavior: the CSS smooth scrolling (for in-page anchors) is
     // switched off while Next.js resets the scroll on a page change, so a new
     // page opens at its top instead of gliding up from the old position.
-    <html lang="en-IN" className={`${sora.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en-IN" className={`${sora.variable} ${inter.variable} ${montserrat.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* Must run before first paint, so it is inline rather than loaded. */}
         <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
