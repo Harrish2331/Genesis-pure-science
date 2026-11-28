@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { mainNav } from "@/content/site";
 import { Emblem, Logo } from "@/components/brand/Logo";
+import { Wordmark } from "@/components/brand/Wordmark";
 import { CloseIcon, MenuIcon, SearchIcon, WhatsAppIcon } from "@/components/ui/Icons";
 import { SearchDialog } from "./SearchDialog";
 
@@ -16,11 +17,10 @@ const isActive = (pathname: string, href: string) =>
 /**
  * Site navigation.
  *
- * Top of page: the full stacked logo, as the brand guidelines' website
- * header shows it. Once scrolled, the bar condenses and switches to the
- * symbol — the approved variation "where space is limited" — so the sticky
- * bar stays slim. On small screens the symbol is used throughout and the
- * full logo heads the menu panel.
+ * The name GENESIS, typeset with PURE LIFESCIENCES beneath it, leads on the
+ * left; the logo symbol closes the bar on the right, after the actions, so
+ * the two brand marks frame the navigation. Once scrolled, the bar condenses
+ * to stay slim. The full logo heads the mobile menu panel.
  *
  * The bar is fixed, with a spacer of its full height holding its place in
  * the page. When it condenses, only the bar changes: the page under it never
@@ -112,18 +112,8 @@ export function Navbar({ whatsapp }: { whatsapp: WhatsAppConfig }) {
             scrolled ? "h-[4.25rem]" : "h-[4.25rem] xl:h-[7.5rem]"
           }`}
         >
-          <Link href="/" className="relative flex shrink-0 items-center rounded-md" aria-label="Genesis Pure Lifesciences — home">
-            {/* Desktop, top of page: the full logo */}
-            <span
-              className={`hidden transition-opacity duration-300 xl:block ${scrolled ? "pointer-events-none absolute opacity-0" : "opacity-100"}`}
-              aria-hidden={scrolled}
-            >
-              <Logo height={102} priority />
-            </span>
-            {/* Condensed / mobile: the symbol */}
-            <span className={`transition-opacity duration-300 ${scrolled ? "opacity-100" : "xl:pointer-events-none xl:absolute xl:opacity-0"}`}>
-              <Emblem height={46} priority decorative />
-            </span>
+          <Link href="/" className="flex shrink-0 items-center rounded-md py-1" aria-label="Genesis Pure Lifesciences — home">
+            <Wordmark />
           </Link>
 
           <ul className="hidden items-center gap-0.5 xl:flex">
@@ -182,6 +172,16 @@ export function Navbar({ whatsapp }: { whatsapp: WhatsAppConfig }) {
             >
               <MenuIcon size={20} />
             </button>
+            {/* The symbol closes the bar: a quiet counterweight to the name on the left. */}
+            <span className="ml-1 hidden h-8 w-px bg-line-strong min-[380px]:block sm:ml-2" aria-hidden="true" />
+            <Link
+              href="/"
+              tabIndex={-1}
+              aria-hidden="true"
+              className="ml-0.5 hidden shrink-0 transition-transform duration-300 hover:scale-105 min-[380px]:block sm:ml-1.5"
+            >
+              <Emblem height={40} priority decorative />
+            </Link>
           </div>
         </nav>
         <div
